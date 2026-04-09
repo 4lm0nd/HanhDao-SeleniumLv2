@@ -20,5 +20,4 @@ public class TC01  extends BaseTest {
       loginPage.login(Constant.account,Constant.password);
       basePage.hoverAndClickComponent("Electronic Components & Supplies");
     }
-
 }

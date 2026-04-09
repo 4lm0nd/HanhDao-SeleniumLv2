@@ -15,10 +15,9 @@ public class BaseTest {
             TestListener.setDriver(DriverManager.getDriver());
             DriverManager.getDriver().get(Constant.url);
         }
-//        @AfterMethod
-//        public void tearDown() {
-//            quitDriver();
-//        }
-
-    }
+      @AfterMethod
+       public void tearDown() {
+            quitDriver();
+      }
+  }
 
