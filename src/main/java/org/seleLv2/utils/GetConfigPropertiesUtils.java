@@ -1,7 +1,5 @@
-package utils;
+package org.seleLv2.utils;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 

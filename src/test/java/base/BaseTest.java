@@ -1,23 +1,17 @@
 package base;
 
-import common.constant.Constant;
-import drivers.DriverManager;
+import org.seleLv2.common.constant.Constant;
+import org.seleLv2.drivers.DriverManager;
 import org.testng.annotations.*;
-import listeners.TestListener;
-import static drivers.DriverManager.quitDriver;
+import static org.seleLv2.drivers.DriverManager.quitDriver;
 
-@Listeners({listeners.TestListener.class})
 public class BaseTest {
-        @BeforeMethod
-        @Parameters("browser")
-        public void setUp(@Optional("chrome") String browser) {
-            DriverManager.initDriver(browser);
-            TestListener.setDriver(DriverManager.getDriver());
+    @BeforeMethod
+           public void setUp() {
+            DriverManager.initDriver(Constant.browser);
             DriverManager.getDriver().get(Constant.url);
         }
-      @AfterMethod
-       public void tearDown() {
-            quitDriver();
-      }
+    @AfterMethod
+     public void tearDown() {quitDriver();}
   }
 

@@ -7,7 +7,5 @@
     </test>
     <listeners>
         <listener class-name="org.seleLv2.listeners.TestListener"/>
-        <listener class-name="org.seleLv2.listeners.SimpleHtmlReportListener" />
-        <listener class-name="org.seleLv2.listeners.RetryListener"/>
     </listeners>
 </suite>

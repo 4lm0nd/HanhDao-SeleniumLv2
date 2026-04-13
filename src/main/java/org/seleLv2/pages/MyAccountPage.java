@@ -1,10 +1,10 @@
-package pageobjects;
+package org.seleLv2.pages;
 
-import elements.Elements;
-import elements.Textbox;
+import org.seleLv2.elements.Elements;
+import org.seleLv2.elements.Textbox;
 import org.openqa.selenium.By;
 
-public class MyAccountPage {
+public class MyAccountPage extends BasePage  {
     private final By txtEmail = By.id("username");
     private final By txtPassword = By.id("password");
     private final By btnLogin = By.xpath("//button[@name='login']");
