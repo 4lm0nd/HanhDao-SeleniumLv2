@@ -1,11 +1,7 @@
-package drivers;
+package org.seleLv2.drivers;
 
-import common.enums.Browsers;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
+import org.seleLv2.common.enums.Browsers;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import static drivers.DriverFactory.createDriver;
 
 public class DriverManager {
 
@@ -13,7 +9,7 @@ public class DriverManager {
 
     public static void initDriver(String browser) {
         if (driver.get() == null) {
-            WebDriver driverInstance = createDriver(Browsers.valueOf(browser.toUpperCase()));
+            WebDriver driverInstance = DriverFactory.createDriver(Browsers.valueOf(browser.toUpperCase()));
             driverInstance.manage().window().maximize();
             driver.set(driverInstance);
         }

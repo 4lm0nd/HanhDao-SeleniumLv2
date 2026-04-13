@@ -1,5 +1,5 @@
-package drivers;
-import common.enums.Browsers;
+package org.seleLv2.drivers;
+import org.seleLv2.common.enums.Browsers;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
