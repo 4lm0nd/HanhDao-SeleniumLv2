@@ -1,17 +1,27 @@
 package base;
 
-import org.seleLv2.common.constant.Constant;
-import org.seleLv2.drivers.DriverManager;
+import static com.codeborne.selenide.Selenide.open;
+import org.seleLv2.drivers.DriverConfig;
+import org.seleLv2.pages.CartPage;
+import org.seleLv2.pages.HeaderPage;
+import org.seleLv2.pages.MyAccountPage;
+import org.seleLv2.pages.ProductPage;
+import org.seleLv2.utils.LogUtils;
 import org.testng.annotations.*;
-import static org.seleLv2.drivers.DriverManager.quitDriver;
 
 public class BaseTest {
+
     @BeforeMethod
-           public void setUp() {
-            DriverManager.initDriver(Constant.browser);
-            DriverManager.getDriver().get(Constant.url);
-        }
-    @AfterMethod
-     public void tearDown() {quitDriver();}
-  }
+    public void setUp() {
+        DriverConfig.init();
+        open("/");
+        LogUtils.info("=== TEST START ===");
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+//        Selenide.closeWebDriver();
+//        LogUtils.info("=== TEST END ===");
+    }
+}
 

@@ -1,42 +1,82 @@
 package org.seleLv2.elements;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.interactions.Actions;
-import org.seleLv2.drivers.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.seleLv2.utils.WaitUtils;
-import java.util.List;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.seleLv2.utils.LogUtils;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class Elements {
-    public static WebElement find(By locator) {
-        return DriverManager.getDriver().findElement(locator);
+
+    private final SelenideElement element;
+    private final String xpath;
+
+    // ===== CONSTRUCTOR =====
+    public Elements(String xpath) {
+        this.xpath = xpath;
+        this.element = $x(xpath);
     }
 
-    public static void click(By locator) {
-        WaitUtils.waitForClickable(locator);
-        DriverManager.getDriver().findElement(locator).click();
+    public static Elements $(String xpath) {
+        return new Elements(xpath);
     }
 
-    public static void hover(By locator){
-        Actions actions = new Actions(DriverManager.getDriver());
-        actions.moveToElement(DriverManager.getDriver().findElement(locator)).perform();
+    // ===== GET =====
+    public SelenideElement get() {
+        return element;
     }
 
-    public static String getText(By locator) {
-        return WaitUtils.waitForVisible(locator).getText();
+    // ===== CLICK =====
+    public Elements click() {
+        element.shouldBe(visible, enabled);
+        element.click();
+        LogUtils.info("Clicked: " + xpath);
+        return this;
     }
 
-    public static List<WebElement> getElements(By locator) {
-        return WaitUtils.waitForAllVisible(locator);
+    // ===== TYPE =====
+    public Elements type(String text) {
+        element.shouldBe(visible).setValue(text);
+        LogUtils.info("Typed into: " + xpath);
+        return this;
     }
 
-    public static void scrollToElement(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
-        js.executeScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
-                element
-        );
+    // ===== HOVER =====
+    public Elements hover() {
+        element.shouldBe(visible).hover();
+        LogUtils.info("Hovered: " + xpath);
+        return this;
+    }
+
+    // ===== SCROLL =====
+    public Elements scrollTo() {
+        element.scrollIntoView("{block: 'center'}");
+        LogUtils.info("Scrolled to: " + xpath);
+        return this;
+    }
+
+    // ===== TEXT =====
+    public String text() {
+        return element.shouldBe(visible).getText();
+    }
+
+    // ===== VISIBLE =====
+    public boolean isVisible() {
+        return element.isDisplayed();
+    }
+
+    // ===== ENABLE =====
+    public boolean isEnable() {
+        return element.isEnabled();
+    }
+
+    public void waitUntilElementEnable(int timeout){
+        element.shouldBe(Condition.enabled, Duration.ofSeconds(timeout));
     }
 }
