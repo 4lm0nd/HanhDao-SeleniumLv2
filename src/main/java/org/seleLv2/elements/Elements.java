@@ -3,6 +3,7 @@ package org.seleLv2.elements;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seleLv2.utils.LogUtils;
@@ -78,5 +79,10 @@ public class Elements {
 
     public void waitUntilElementEnable(int timeout){
         element.shouldBe(Condition.enabled, Duration.ofSeconds(timeout));
+    }
+
+    public Elements selectElementByText( String option) {
+        element.shouldBe(visible).selectOption(option);
+        return this;
     }
 }

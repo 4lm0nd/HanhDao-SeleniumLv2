@@ -1,11 +1,9 @@
 package base;
 
 import static com.codeborne.selenide.Selenide.open;
+
+import com.codeborne.selenide.Selenide;
 import org.seleLv2.drivers.DriverConfig;
-import org.seleLv2.pages.CartPage;
-import org.seleLv2.pages.HeaderPage;
-import org.seleLv2.pages.MyAccountPage;
-import org.seleLv2.pages.ProductPage;
 import org.seleLv2.utils.LogUtils;
 import org.testng.annotations.*;
 
@@ -20,8 +18,8 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-//        Selenide.closeWebDriver();
-//        LogUtils.info("=== TEST END ===");
+        Selenide.closeWebDriver();
+        LogUtils.info("=== TEST END ===");
     }
 }
 
