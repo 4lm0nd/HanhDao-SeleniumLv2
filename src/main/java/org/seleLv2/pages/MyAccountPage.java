@@ -1,17 +1,19 @@
 package org.seleLv2.pages;
 
-import org.seleLv2.elements.Elements;
-import org.seleLv2.elements.Textbox;
 import org.openqa.selenium.By;
+import org.seleLv2.data.AccountInfo;
 
-public class MyAccountPage extends BasePage  {
-    private final By txtEmail = By.id("username");
-    private final By txtPassword = By.id("password");
-    private final By btnLogin = By.xpath("//button[@name='login']");
+import static org.seleLv2.elements.Elements.$;
 
-    public void login(String username, String password) {
-        Textbox.sendKeys(txtEmail,username);
-        Textbox.sendKeys(txtPassword,password);
-        Elements.click(btnLogin);
+public class MyAccountPage {
+
+    String txtEmail = "//input[@id='username']";
+    String txtPassword = "//input[@id='password']";
+    String btnLogin = "//button[@name='login']";
+
+    public void login(AccountInfo accountinfo) {
+        $(txtEmail).type(accountinfo.getEmail());
+        $(txtPassword).type(accountinfo.getPass());
+        $(btnLogin).click();
     }
 }

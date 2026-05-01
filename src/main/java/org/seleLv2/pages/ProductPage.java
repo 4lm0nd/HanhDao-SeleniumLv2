@@ -1,24 +1,54 @@
 package org.seleLv2.pages;
 
-import org.seleLv2.elements.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.RandomUtils;
+import org.seleLv2.utils.UrlUtils;
 
-import java.util.List;
+import static org.seleLv2.elements.ElementList.$$;
+import static org.seleLv2.elements.Elements.$;
 
-public class ProductPage extends BasePage {
+public class ProductPage {
 
-    private final By productList = By.xpath("//div[@class='text-center product-details']//a[contains(@href,'add-to-cart')]");
+    private SelenideElement selectedProduct;
 
-    public void clickRandomProduct() {
-        List<WebElement> items = Elements.getElements(productList);
-        WebElement randomItem = RandomUtils.getRandomItem(items);
-        int index = RandomUtils.getRandomIndex(items.size());
-        String className = randomItem.getAttribute("href");
-        LogUtils.info("Selected index: " + className);
-        Elements.scrollToElement(randomItem);
-        randomItem.click();
+    public SelenideElement getRandomProduct() {
+        if (selectedProduct == null) {
+            String productList = "//div[@class='text-center product-details']//a[contains(@href,'add-to-cart')]";
+            ElementsCollection items = $$(productList).gets();
+            selectedProduct = RandomUtils.getRandomItem(items);
+            LogUtils.info("the product is: " + selectedProduct.getAttribute("href"));
+        }
+            return selectedProduct;
+    }
+
+    public String getSelectedProductKey() {
+        String productID = getRandomProduct().getAttribute("href");
+        assert productID != null;
+        return UrlUtils.getQueryParam(productID, "?");
+    }
+
+    public String getProductName() {
+        String key = getSelectedProductKey();
+        String productTitle = "//a[contains(@href,'" + key + "')]/ancestor::div/h2[@class='product-title']";
+        return $(productTitle).get().getText();
+    }
+
+    public String getProductPrice() {
+        String key = getSelectedProductKey();
+        String salePrice = "//a[contains(@href,'" + key + "')]/preceding-sibling::span[@class='price']//ins//bdi";
+        String normalPrice = "//a[contains(@href,'" + key + "')]/preceding-sibling::span[@class='price']//bdi";
+        if ($(salePrice).isVisible()) {
+            return $(salePrice).text();
+        }
+        return $(normalPrice).text();
+    }
+
+    public void clickProduct() {
+        String key = getSelectedProductKey();
+        String product = "//div[@class='text-center product-details']//a[contains(@href,'" + key + "')]";
+        $(product).scrollTo().click();
     }
 }

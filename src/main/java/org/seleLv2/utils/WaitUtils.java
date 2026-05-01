@@ -1,31 +1,25 @@
 package org.seleLv2.utils;
 
-import org.seleLv2.common.constant.Constant;
-import org.seleLv2.drivers.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.List;
-
 
 public class WaitUtils {
-    public static WebElement waitForVisible(By locator)
-         {
-            return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.timeout))
-                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
-        }
 
-        public static List<WebElement> waitForAllVisible(By locator) {
-            return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.timeout))
-                    .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
-        }
+    public static void waitForPageLoad(int timeoutInSeconds) {
 
-        public static void waitForClickable(By locator) {
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(Constant.timeout))
-                    .until(ExpectedConditions.elementToBeClickable(locator));
-        }
+        WebDriverWait wait = new WebDriverWait(
+                WebDriverRunner.getWebDriver(),
+                Duration.ofSeconds(timeoutInSeconds)
+        );
+
+        wait.until(driver -> ((JavascriptExecutor) driver)
+                .executeScript("return document.readyState")
+                .equals("complete"));
+
+        // optional: delay for UI render
+        Selenide.sleep(1000);
     }
-
+}
