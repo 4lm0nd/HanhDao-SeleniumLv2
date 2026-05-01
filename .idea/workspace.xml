@@ -4,33 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="078f42ae-bbae-4c9c-a362-8e82ef58a797" name="Changes" comment="Selenium frameworkdemo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/DataTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/PaymentMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/SortOptions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/dataprovider/PaymentData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/SortUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_03.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/Messages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/elements/Elements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/elements/Elements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/elements/Tables.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CartPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CartPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CheckOutPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CheckOutPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/HeaderPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/HeaderPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrderStatusPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrderStatusPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/ProductPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/ProductList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/AssertUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/AssertUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/WaitUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/WaitUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/base/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/testcases/TC001.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/testng - Copy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testng - Copy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testng.xml" afterDir="false" />
-    </list>
+    <list default="true" id="078f42ae-bbae-4c9c-a362-8e82ef58a797" name="Changes" comment="Selenium frameworkdemo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +85,7 @@
     "TestNG.TC_04.executor": "Run",
     "TestNG.TC_Draft.TC0Draft.executor": "Run",
     "TestNG.TC_Draft.executor": "Run",
-    "git-widget-placeholder": "#2 on feature/SelenideDemo-Tc01",
+    "git-widget-placeholder": "feature/implement-TC02-04",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Automation/HanhDao-SeleniumLv2",
     "onboarding.tips.debug.path": "D:/Automation/HanhDao-SeleniumLv2/src/main/java/org/example/Main.java",
