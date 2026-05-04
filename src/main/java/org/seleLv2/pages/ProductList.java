@@ -2,6 +2,7 @@ package org.seleLv2.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.seleLv2.common.constant.Constant;
 import org.seleLv2.data.ProductInfo;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.RandomUtils;
@@ -57,11 +58,12 @@ public class ProductList {
     public List<ProductInfo> addProductsToCart(int number) {
         List<ProductInfo> addedProducts = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            selectedProduct = RandomUtils.getRandomItem(items);
             List<SelenideElement> shuffledItems = new ArrayList<>(items);
             Collections.shuffle(shuffledItems);
+            selectedProduct = shuffledItems.get(i);
             String key = getSelectedProductKey();
             String product = "//div[@class='text-center product-details']//a[contains(@href,'" + key + "')]";
+            $(product).isEnable();
             $(product).scrollTo().click();
             String name = getProductName();
             String price = getProductPrice();

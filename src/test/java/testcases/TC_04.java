@@ -1,8 +1,8 @@
 package testcases;
 
 import base.BaseTest;
-
 import org.seleLv2.common.constant.Constant;
+import org.seleLv2.common.enums.HeaderItems;
 import org.seleLv2.common.enums.SortOptions;
 import org.seleLv2.data.AccountInfo;
 import org.seleLv2.pages.*;
@@ -15,18 +15,18 @@ public class TC_04 extends BaseTest {
 
     String account = Constant.account;
     String password = Constant.password;
-    private final MyAccountPage accountPage = new MyAccountPage();
+    private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
     private final ProductList productList = new ProductList();
 
     @Test
     public void TC04() {
         LogUtils.info(" Login with valid credentials");
-        headerPage.gotoLoginPage();
+        headerPage.selectHeaderMenu(HeaderItems.MY_ACCOUNT.getItems());
         AccountInfo accountInfo = new AccountInfo(account, password);
         accountPage.login(accountInfo);
         LogUtils.info("Go to Shop page");
-        headerPage.gotoShopPage();
+        headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
         LogUtils.info("Sort items by price: low to high");
         productList.filterProducts(SortOptions.OPTION_LOW_TO_HIGH.getSortOption());
         WaitUtils.waitForPageLoad(Constant.timeout);

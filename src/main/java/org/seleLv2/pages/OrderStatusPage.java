@@ -4,7 +4,6 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.data.ProductInfo;
-import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.Assert;
 
@@ -16,7 +15,7 @@ import static org.seleLv2.elements.ElementList.$$;
 import static org.seleLv2.elements.Elements.$;
 
 public class OrderStatusPage {
-    private final String tableProduct = "//table[@class='woocommerce-table woocommerce-table--order-details shop_table order_details']//tbody";
+    public final String tableProduct = "//table[@class='woocommerce-table woocommerce-table--order-details shop_table order_details']//tbody";
 
     public String getPageHeader() {
         String tabOrderStatus = "//a[@href and contains(text(),'Order status')]";
@@ -30,12 +29,6 @@ public class OrderStatusPage {
         String tableBilling = "//section[@class='woocommerce-customer-details']/address";
         $(tableBilling).text();
         return $(tableBilling).text();
-    }
-
-    public String getTableProduct() {
-        WaitUtils.waitForPageLoad(Constant.timeout);
-        $(tableProduct).text();
-        return $(tableProduct).text();
     }
 
     public List<ProductInfo> getProductsInOrder() {
@@ -69,4 +62,5 @@ public class OrderStatusPage {
        String paymentInfo = "//li[@class='woocommerce-order-overview__payment-method method']/strong";
        return $(paymentInfo).text();
     }
+
 }

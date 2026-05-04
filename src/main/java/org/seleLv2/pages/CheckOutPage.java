@@ -46,22 +46,10 @@ public class CheckOutPage {
         $(txtPhone).type(billing.getPhone());
         $(txtEmail).type(billing.getEmail());
     }
-    public void placeOrder(String firstname, String lastname,
-                           String street, String town, String zipcode,
-                           String phone, String email) {
-        Billing billing = new Billing(firstname, lastname, street, town, zipcode, phone, email);
+    public void placeOrder(Billing billing) {
         fillBilling(billing);
         WaitUtils.waitForPageLoad(Constant.timeout);
         $(btnPlaceOrder).click();
-    }
-    public String getProductName() {
-        String productTitle = tableReview + "//td[@class='product-name']";
-        return $(productTitle).text();
-    }
-
-    public String getProductPrice() {
-        String productPrice = tableReview + "//span[@class='woocommerce-Price-amount amount']//bdi";
-        return  $(productPrice).text();
     }
 
     public List<ProductInfo> getCheckOutProducts() {

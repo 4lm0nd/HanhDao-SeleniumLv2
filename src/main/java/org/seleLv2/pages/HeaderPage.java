@@ -10,9 +10,6 @@ import static org.seleLv2.elements.Elements.$;
 
 public class HeaderPage {
     private final String link = "//a[@href='%s']";
-    private final String linkMyAccount = UrlUtils.getUrl("my-account/");
-    private final String linkMyCard = UrlUtils.getUrl("cart/");
-    private final String linkShop = UrlUtils.getUrl("shop/");
 
     public void hoverAndClickComponent(String item) {
         try {
@@ -26,21 +23,10 @@ public class HeaderPage {
         }
     }
 
-    public void gotoLoginPage() {
-        String authLink =  String.format(link, linkMyAccount);
-        $(authLink).click();
-    }
+    public void selectHeaderMenu(String item){
 
-    public void gotoShoppingCard() {
-        String myCardLink = String.format(link, linkMyCard);
-        $(myCardLink).scrollTo();
-        $(myCardLink).click();
-        refresh();
-    }
-
-    public void gotoShopPage(){
-        String shopLink =  String.format(link, linkShop);
-        $(shopLink).click();
-
+        String itemLink = String.format(link, UrlUtils.getUrl(item));
+        $(itemLink).scrollTo();
+        $(itemLink).click();
     }
 }
