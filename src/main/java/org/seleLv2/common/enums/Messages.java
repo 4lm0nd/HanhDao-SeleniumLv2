@@ -2,7 +2,7 @@ package org.seleLv2.common.enums;
 
 public enum Messages {
     MSG_EMPTY_CARD("YOUR SHOPPING CART IS EMPTY"),
-    MSG_PLACE_ORDER("Thank you. Your order has been received");
+    MSG_ORDER_CONFIRMATION("THANK YOU. YOUR ORDER HAS BEEN RECEIVED.");
 
     private final String message;
 

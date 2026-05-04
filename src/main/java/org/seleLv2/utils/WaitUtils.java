@@ -20,6 +20,6 @@ public class WaitUtils {
                 .equals("complete"));
 
         // optional: delay for UI render
-        Selenide.sleep(1000);
+        Selenide.sleep(timeoutInSeconds);
     }
 }

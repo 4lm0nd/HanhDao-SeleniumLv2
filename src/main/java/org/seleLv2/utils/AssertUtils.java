@@ -15,7 +15,6 @@ public class AssertUtils {
     public static void assertContains(String actual, String expected) {
         String a = normalize(actual);
         String e = normalize(expected);
-
         Assert.assertTrue(
                 a.toLowerCase().contains(e.toLowerCase()),
                 String.format("Actual [%s] to contain [%s]", actual, expected)
