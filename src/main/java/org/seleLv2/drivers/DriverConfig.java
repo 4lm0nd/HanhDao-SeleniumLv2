@@ -1,5 +1,6 @@
 package org.seleLv2.drivers;
 import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.seleLv2.common.enums.Browsers;
 import org.seleLv2.utils.LogUtils;
 
@@ -21,6 +22,10 @@ public class DriverConfig {
         switch (browserType) {
             case CHROME:
                 Configuration.browser = "chrome";
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-notifications");
+                options.addArguments("--disable-popup-blocking");
+                Configuration.browserCapabilities = options;
                 break;
             case FIREFOX:
                 Configuration.browser = "firefox";

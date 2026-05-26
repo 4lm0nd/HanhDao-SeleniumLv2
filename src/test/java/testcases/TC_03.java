@@ -5,11 +5,12 @@ import base.BaseTest;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.HeaderItems;
 import org.seleLv2.common.enums.Messages;
+import org.seleLv2.data.AccountInfo;
 import org.seleLv2.data.Billing;
 import org.seleLv2.dataprovider.PaymentData;
 import org.seleLv2.pages.*;
 import org.seleLv2.utils.AssertUtils;
-import org.seleLv2.utils.DateUtils;
+import org.seleLv2.utils.DataUtils;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.annotations.Test;
@@ -25,7 +26,7 @@ public class TC_03 extends BaseTest {
     private final CartPage cartPage = new CartPage();
     private final CheckOutPage checkOutPage = new CheckOutPage();
     private final OrderStatusPage orderStatusPage = new OrderStatusPage();
-    private final String emailTC03 = "TC03" + DateUtils.convertDateToString() + "@yopmail.com";
+    private final String emailTC03 = "TC03" + DataUtils.convertDateToString() + "@yopmail.com";
     String firstname = Constant.firstname;
     String lastname = Constant.lastname;
     String street = Constant.street;
@@ -35,23 +36,26 @@ public class TC_03 extends BaseTest {
 
     @Test(dataProvider = "paymentMethods", dataProviderClass = PaymentData.class)
     public void TC03(String paymentMethod, String paymentName){
-        LogUtils.info("Login with valid credentials");
+
         headerPage.selectHeaderMenu(HeaderItems.MY_ACCOUNT.getItems());
-        accountPage.register(emailTC03);
-        LogUtils.info("Go to Shop page and add an item to cart");
-        headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
-        productList.addProductsToCart(1);
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        AccountInfo accountInfo = new AccountInfo(account, password);
+        accountPage.login(accountInfo);
+
+        LogUtils.info("Pre-conditions: Clear shopping card");
         headerPage.selectHeaderMenu(HeaderItems.SHOPPING_CARD.getItems());
-        refresh();
-        LogUtils.info("Go to Checkout page and Choose a different payment method");
+        cartPage.removeAllItems();
+        headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
+        productList.addProductsToCart(1,"1");
+        WaitUtils.waitForPageLoad(Constant.timeout);
+        headerPage.goToShoppingCard();
         cartPage.goCheckOutProcess();
         checkOutPage.selectPaymentMethod(paymentMethod);
+
         LogUtils.info("Complete the payment process and Verify the order");
         Billing billing = new Billing(firstname, lastname, street, town, zipcode, phone, emailTC03);
         checkOutPage.placeOrder(billing);
         WaitUtils.waitForPageLoad(Constant.timeout);
-        AssertUtils.assertEquals(orderStatusPage.getMgsOrderConfirmation(), Messages.MSG_ORDER_CONFIRMATION.getMessage());
-        AssertUtils.assertContains(orderStatusPage.getPaymentInfo(), paymentName);
+        AssertUtils.assertEquals(orderStatusPage.getMgsOrderConfirmation(), Messages.MSG_ORDER_CONFIRMATION.getMessage(),Constant.shortTime);
+        AssertUtils.assertContains(orderStatusPage.getPaymentInfo(), paymentName,Constant.shortTime);
     }
 }

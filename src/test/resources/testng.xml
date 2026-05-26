@@ -1,11 +1,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Suite" parallel="tests" thread-count="1">
+<suite name="Parallel Suite" parallel="classes" thread-count="1">
     <test name="Test Run">
         <classes>
             <class name="testcases.TC_01"/>
             <class name="testcases.TC_02"/>
             <class name="testcases.TC_03"/>
             <class name="testcases.TC_04"/>
+            <class name="testcases.TC_05"/>
+            <class name="testcases.TC_06"/>
+            <class name="testcases.TC_07"/>
+            <class name="testcases.TC_08"/>
+            <class name="testcases.TC_09"/>
+            <class name="testcases.TC_10"/>
         </classes>
     </test>
     <listeners>

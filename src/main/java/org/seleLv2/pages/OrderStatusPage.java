@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static org.apache.commons.lang3.math.NumberUtils.toDouble;
 import static org.seleLv2.elements.ElementList.$$;
 import static org.seleLv2.elements.Elements.$;
 
@@ -38,7 +39,8 @@ public class OrderStatusPage {
         for (SelenideElement row : rows.shouldHave(sizeGreaterThan(0))) {
             String name = row.$("td.woocommerce-table__product-name.product-name").getText();
             String price = row.$("td.woocommerce-table__product-total.product-total").getText();
-            products.add(new ProductInfo(name, price));
+            String quantity = "1";
+            products.add(new ProductInfo(name, price, quantity));
         }
         return products;
     }
@@ -47,7 +49,8 @@ public class OrderStatusPage {
         WaitUtils.waitForPageLoad(Constant.timeout);
         List<ProductInfo> actual = getProductsInOrder();
         for (ProductInfo exp : expected){
-            boolean found =   actual.stream().anyMatch(act -> act.getProductName().contains(exp.getProductName()) && act.getPrice().contains(exp.getPrice()));
+            boolean found =   actual.stream().anyMatch(act -> act.getProductName().contains(exp.getProductName()) &&
+                    toDouble(act.getPrice()) == toDouble(exp.getPrice()));
             Assert.assertTrue(found, "Product not found in cart: " + exp.getProductName());
         }
     }

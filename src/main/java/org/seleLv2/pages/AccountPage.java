@@ -26,7 +26,7 @@ public class AccountPage {
         $(btnRegister).click();
     }
 
-    public void selectOrderItem(String item){
+    public void selectMenuAccount(String item){
         String itemLink = String.format(menuAccount, UrlUtils.getUrl(item));
         $(itemLink).scrollTo();
         $(itemLink).click();

@@ -5,27 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="078f42ae-bbae-4c9c-a362-8e82ef58a797" name="Changes" comment=" Implement TC02-04 with DataProvider">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/business/PlaceOrders.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/AccountMenuItems.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/HeaderItems.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/data/OrderInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/elements/Tables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrdersHistoryPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/DateUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_05.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/RatingReview.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/ProductDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/CookieUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_06.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_07.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_08.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_09.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_10.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/data/Billing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/data/Billing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/business/PlaceOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/business/PlaceOrders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/constant/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/common/enums/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/data/ProductInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/data/ProductInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/drivers/DriverConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/drivers/DriverConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/elements/Elements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/elements/Elements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/AccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/AccountPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CartPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CartPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CheckOutPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/CheckOutPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/HeaderPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/HeaderPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/MyAccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/AccountPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrderStatusPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrderStatusPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrdersHistoryPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/OrdersHistoryPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/ProductList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/pages/ProductList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/AssertUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/AssertUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/DataUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/WaitUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/seleLv2/utils/WaitUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/base/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/base/BaseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/testcases/TC_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_01.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/testcases/TC_02.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_02.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/testcases/TC_03.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_03.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/testcases/TC_04.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/testcases/TC_05.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/testcases/TC_05.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/testng - Copy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testng - Copy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/testng.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +108,8 @@
     &quot;TestNG.ClearShoppingCart.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng - Copy.xml.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.Draft.Test.executor&quot;: &quot;Debug&quot;,
+    &quot;TestNG.Draft.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC001.TC01.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC001.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC002.TC02.executor&quot;: &quot;Run&quot;,
@@ -107,9 +122,14 @@
     &quot;TestNG.TC_03.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC_04.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC_05.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_06.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_07.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_08.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_09.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TC_10.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC_Draft.TC0Draft.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.TC_Draft.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#3 on feature/implement-TC02-04&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/testcase05&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Automation/HanhDao-SeleniumLv2&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;D:/Automation/HanhDao-SeleniumLv2/src/main/java/org/example/Main.java&quot;,
@@ -125,7 +145,7 @@
       <recent name="D:\Automation\HanhDao-SeleniumLv2\src\test\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.TC_05">
+  <component name="RunManager" selected="TestNG.D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng.xml">
     <configuration name="D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng - Copy.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="HanhDao-SeleniumLv2" />
       <option name="SUITE_NAME" value="$PROJECT_DIR$/src/test/resources/testng - Copy.xml" />
@@ -136,7 +156,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_01" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="HanhDao-SeleniumLv2" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/test/resources/testng.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Draft" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="HanhDao-SeleniumLv2" />
       <extension name="coverage">
         <pattern>
@@ -145,7 +175,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="testcases" />
-      <option name="MAIN_CLASS_NAME" value="testcases.TC_01" />
+      <option name="MAIN_CLASS_NAME" value="testcases.Draft" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -153,7 +183,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_02" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TC_07" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="HanhDao-SeleniumLv2" />
       <extension name="coverage">
         <pattern>
@@ -162,7 +192,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="testcases" />
-      <option name="MAIN_CLASS_NAME" value="testcases.TC_02" />
+      <option name="MAIN_CLASS_NAME" value="testcases.TC_07" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -170,7 +200,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TC_04" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TC_10" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="HanhDao-SeleniumLv2" />
       <extension name="coverage">
         <pattern>
@@ -179,24 +209,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="testcases" />
-      <option name="MAIN_CLASS_NAME" value="testcases.TC_04" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TC_05" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="HanhDao-SeleniumLv2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="testcases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="testcases" />
-      <option name="MAIN_CLASS_NAME" value="testcases.TC_05" />
+      <option name="MAIN_CLASS_NAME" value="testcases.TC_10" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -206,11 +219,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.TC_05" />
-        <item itemvalue="TestNG.TC_02" />
-        <item itemvalue="TestNG.TC_01" />
+        <item itemvalue="TestNG.D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng.xml" />
+        <item itemvalue="TestNG.TC_07" />
+        <item itemvalue="TestNG.TC_10" />
         <item itemvalue="TestNG.D:/Automation/HanhDao-SeleniumLv2/src/test/resources/testng - Copy.xml" />
-        <item itemvalue="TestNG.TC_04" />
+        <item itemvalue="TestNG.Draft" />
       </list>
     </recent_temporary>
   </component>
@@ -299,5 +312,10 @@
     <MESSAGE value="Selenium frameworkdemo" />
     <MESSAGE value=" Implement TC02-04 with DataProvider" />
     <option name="LAST_COMMIT_MESSAGE" value=" Implement TC02-04 with DataProvider" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HanhDao_SeleniumLv2$Draft_Test.ic" NAME="Draft.Test Coverage Results" MODIFIED="1779729660482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>testcases.*</FILTER>
+    </SUITE>
   </component>
 </project>

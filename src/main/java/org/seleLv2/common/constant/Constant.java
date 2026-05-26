@@ -23,5 +23,6 @@ public class Constant {
     public static String fullDatetime = "yyMMddhhmmss";
     public static String shortDateUs = "M/d/yyyy";
     public static int timeout = ConfigFactory.getInt("timeOut");
+    public static int shortTime = ConfigFactory.getInt("shortTime");
     public static String reportPath = ConfigFactory.get("reportPath");
 }

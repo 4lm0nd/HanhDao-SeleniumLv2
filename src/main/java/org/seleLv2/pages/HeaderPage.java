@@ -1,10 +1,12 @@
 package org.seleLv2.pages;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.seleLv2.common.enums.HeaderItems;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.UrlUtils;
 
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.seleLv2.elements.Elements.$;
 
 
@@ -23,10 +25,17 @@ public class HeaderPage {
         }
     }
 
-    public void selectHeaderMenu(String item){
-
+    public void selectHeaderMenu(String item) {
         String itemLink = String.format(link, UrlUtils.getUrl(item));
-        $(itemLink).scrollTo();
-        $(itemLink).click();
+        if ($(itemLink).isVisible()) {
+            $(itemLink).scrollTo().click();
+        } else {
+            $$x(itemLink).findBy(Condition.visible).scrollTo().click();
+        }
+    }
+
+    public void goToShoppingCard(){
+        selectHeaderMenu(HeaderItems.SHOPPING_CARD.getItems());
+        refresh();
     }
 }

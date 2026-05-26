@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class DateUtils {
+public class DataUtils {
     public static String convertDateToString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(Constant.fullDatetime);
         LocalDateTime localDate = LocalDateTime.now();
@@ -20,5 +20,12 @@ public class DateUtils {
                     .format(DateTimeFormatter.ofPattern(Constant.shortDateUs));
         }
 
+
+    public static double convertToDouble(String price) {
+        if (price == null || price.isEmpty()) {
+            return 0;
+        }
+        return Double.parseDouble(price.replaceAll("[^0-9.]", ""));
     }
+}
 

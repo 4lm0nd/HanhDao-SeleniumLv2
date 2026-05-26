@@ -3,38 +3,35 @@ package testcases;
 import base.BaseTest;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.HeaderItems;
-import org.seleLv2.common.enums.SortOptions;
 import org.seleLv2.data.AccountInfo;
-import org.seleLv2.pages.*;
-import org.seleLv2.utils.LogUtils;
-import org.seleLv2.utils.WaitUtils;
+import org.seleLv2.pages.AccountPage;
+import org.seleLv2.pages.CartPage;
+import org.seleLv2.pages.HeaderPage;
+import org.seleLv2.pages.ProductList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_04 extends BaseTest {
+import static com.codeborne.selenide.Selenide.refresh;
+import static org.seleLv2.elements.Elements.$;
+
+public class TC_08 extends BaseTest {
 
     String account = Constant.account;
     String password = Constant.password;
     private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
     private final ProductList productList = new ProductList();
+    private final CartPage cartPage = new CartPage();
 
     @Test
-    public void TC04() {
-
+    public void TC08(){
         headerPage.selectHeaderMenu(HeaderItems.MY_ACCOUNT.getItems());
         AccountInfo accountInfo = new AccountInfo(account, password);
         accountPage.login(accountInfo);
         headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
-
-        LogUtils.info("Sort items by price: low to high");
-        productList.filterProducts(SortOptions.OPTION_LOW_TO_HIGH.getSortOption());
-        WaitUtils.waitForPageLoad(Constant.timeout);
-        Assert.assertTrue(productList.isSortedASC());
-
-        LogUtils.info("Sort items by price: high to low");
-        productList.filterProducts(SortOptions.OPTION_HIGH_TO_LOW.getSortOption());
-        WaitUtils.waitForPageLoad(Constant.timeout);
-        Assert.assertTrue(productList.isSortedDESC());
-    }
+        productList.addProductsToCart(1,"1");
+        headerPage.goToShoppingCard();
+        cartPage.clearCard();
+        cartPage.verifyShoppingCardIsEmpty();
+       }
 }

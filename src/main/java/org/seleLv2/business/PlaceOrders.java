@@ -23,12 +23,12 @@ public class PlaceOrders {
     private static final OrderStatusPage orderStatusPage = new OrderStatusPage();
 
     public static List<OrderInfo> placeOrderMultipleTimes (Billing billing, int times) {
-
+        String quantity ="1";
         List<OrderInfo> orderInfo = new ArrayList<>();
         {
             for (int i = 0; i < times; i++) {
-                headerPage.selectHeaderMenu(HeaderItems.MY_ACCOUNT.getItems());
-                productList.addProductsToCart(1);
+                headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
+                productList.addProductsToCart(1,quantity);
                 waitForPageLoad(Constant.timeout);
                 headerPage.selectHeaderMenu(HeaderItems.SHOPPING_CARD.getItems());
                 refresh();
