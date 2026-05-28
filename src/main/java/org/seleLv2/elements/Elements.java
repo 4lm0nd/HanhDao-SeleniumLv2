@@ -1,14 +1,7 @@
 package org.seleLv2.elements;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seleLv2.utils.LogUtils;
-
-import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
@@ -50,7 +43,7 @@ public class Elements {
 
     // ===== HOVER =====
     public Elements hover() {
-        element.shouldBe(visible).hover();
+        element.shouldBe(visible).scrollTo().hover();
         LogUtils.info("Hovered: " + xpath);
         return this;
     }
@@ -77,12 +70,8 @@ public class Elements {
         return element.isEnabled();
     }
 
-    public void waitUntilElementEnable(int timeout){
-        element.shouldBe(Condition.enabled, Duration.ofSeconds(timeout));
-    }
 
-    public Elements selectElementByText( String option) {
+    public void selectElementByText(String option) {
         element.shouldBe(visible).selectOption(option);
-        return this;
     }
 }

@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 import com.codeborne.selenide.Selenide;
 import org.seleLv2.drivers.DriverConfig;
+import org.seleLv2.utils.CookieUtils;
 import org.seleLv2.utils.LogUtils;
 import org.testng.annotations.*;
 
@@ -13,6 +14,7 @@ public class BaseTest {
     public void setUp() {
         DriverConfig.init();
         open("/");
+        CookieUtils.acceptCookiesIfPresent();
         LogUtils.info("=== TEST START ===");
     }
 

@@ -1,18 +1,17 @@
 package org.seleLv2.pages;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.seleLv2.common.enums.HeaderItems;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.UrlUtils;
 
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 import static org.seleLv2.elements.Elements.$;
 
 
 public class HeaderPage {
     private final String link = "//a[@href='%s']";
-    private final String linkMyAccount = UrlUtils.getUrl("my-account/");
-    private final String linkMyCard = UrlUtils.getUrl("cart/");
-    private final String linkShop = UrlUtils.getUrl("shop/");
 
     public void hoverAndClickComponent(String item) {
         try {
@@ -26,21 +25,17 @@ public class HeaderPage {
         }
     }
 
-    public void gotoLoginPage() {
-        String authLink =  String.format(link, linkMyAccount);
-        $(authLink).click();
+    public void selectHeaderMenu(String item) {
+        String itemLink = String.format(link, UrlUtils.getUrl(item));
+        if ($(itemLink).isVisible()) {
+            $(itemLink).scrollTo().click();
+        } else {
+            $$x(itemLink).findBy(Condition.visible).scrollTo().click();
+        }
     }
 
-    public void gotoShoppingCard() {
-        String myCardLink = String.format(link, linkMyCard);
-        $(myCardLink).scrollTo();
-        $(myCardLink).click();
+    public void goToShoppingCard(){
+        selectHeaderMenu(HeaderItems.SHOPPING_CARD.getItems());
         refresh();
-    }
-
-    public void gotoShopPage(){
-        String shopLink =  String.format(link, linkShop);
-        $(shopLink).click();
-
     }
 }

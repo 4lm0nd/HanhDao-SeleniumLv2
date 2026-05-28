@@ -13,7 +13,6 @@ public class Billing {
     public Billing(String firstname, String lastname,
                    String street, String town, String zipcode,
                    String phone, String email) {
-
         this.firstname = firstname;
         this.lastname = lastname;
         this.street = street;
@@ -21,7 +20,6 @@ public class Billing {
         this.zipcode = zipcode;
         this.email = email;
         this.phone = phone;
-
     }
 
     public String getFirstname() {
