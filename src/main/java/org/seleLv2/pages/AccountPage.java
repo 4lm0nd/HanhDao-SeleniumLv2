@@ -3,7 +3,7 @@ package org.seleLv2.pages;
 import org.seleLv2.data.AccountInfo;
 import org.seleLv2.utils.UrlUtils;
 
-import static org.seleLv2.elements.Elements.$;
+import static org.seleLv2.elements.Element.$;
 
 public class AccountPage {
 

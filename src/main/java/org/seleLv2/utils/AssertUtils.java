@@ -1,37 +1,51 @@
 package org.seleLv2.utils;
 
+import org.apache.hc.core5.function.Supplier;
 import org.seleLv2.common.constant.Constant;
 import org.testng.Assert;
 
+
+
 public class AssertUtils {
 
-    public static void assertEquals(String actual, String expected, int timeout) {
+    public static void assertEquals(
+            Supplier<String> actualSupplier,
+            String expected) {
 
-      retryAssert(() ->
+        retryAssert(() -> {
 
-        Assert.assertEquals(
-                actual,
-                expected,
-                String.format("Expected [%s] but got [%s]", expected, actual)
-        ),
-              timeout,
-              100
-      );
+            String actual = actualSupplier.get();
+
+            Assert.assertEquals(
+                    actual,
+                    expected,
+                    String.format(
+                            "Expected [%s] but got [%s]",
+                            expected,
+                            actual)
+            );
+
+        }, Constant.timeInSecond, Constant.timeInMilliSecond);
     }
 
-    public static void assertContains(String actual, String expected, int timeout) {
-        String a = normalize(actual);
-        String e = normalize(expected);
+    public static void assertContains(
+            Supplier<String> actualSupplier,
+            String expected) {
 
-       retryAssert(() ->
+        retryAssert(() -> {
 
-        Assert.assertTrue(
-                a.toLowerCase().contains(e.toLowerCase()),
-                String.format("Actual [%s] to contain [%s]", actual, expected)
-        ),
-               timeout,
-               100
-        );
+            String actual = actualSupplier.get();
+
+            Assert.assertTrue(
+                    normalize(actual)
+                            .toLowerCase()
+                            .contains(
+                                    normalize(expected)
+                                            .toLowerCase()
+                            )
+            );
+
+        }, Constant.timeInSecond, 100);
     }
 
     private static String normalize(String input) {
@@ -75,6 +89,14 @@ public class AssertUtils {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+
+    public static void assertActiveMode(boolean activeMode) {
+        retryAssert(() -> Assert.assertTrue(activeMode),
+                Constant.timeInSecond,
+                Constant.timeInMilliSecond);
+
     }
 }
 

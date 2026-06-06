@@ -33,7 +33,7 @@ public class TC_05 extends BaseTest {
         headerPage.selectHeaderMenu(HeaderItems.MY_ACCOUNT.getItems());
         accountPage.register(emailTC05);
         Billing billing = new Billing(firstname, lastname, street, town, zipcode, phone, emailTC05);
-        List<OrderInfo> orderInfoList = PlaceOrders.placeOrderMultipleTimes(billing,2);
+        List<OrderInfo> orderInfoList = PlaceOrders.placeOrderProcess(billing,2);
         headerPage.selectHeaderMenu(HeaderItems.MY_ACCOUNT.getItems());
         accountPage.selectMenuAccount(AccountMenuItems.ORDER.getItems());
         ordersTablePage.verifyOrderInfo(orderInfoList);

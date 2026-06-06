@@ -1,14 +1,12 @@
 package org.seleLv2.drivers;
+
 import org.seleLv2.utils.LogUtils;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-
-
 public class ConfigFactory {
-
     private static final Properties properties = ConfigFactory.getProperties();
 
     public static Properties getProperties() {
@@ -21,13 +19,13 @@ public class ConfigFactory {
 
         try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(path)) {
             if (is == null) {
-               LogUtils.info("!!! Not Found " + path);
+                LogUtils.info("!!! Not Found " + path);
             } else {
                 p.load(is);
                 LogUtils.info("--- Load file successfully! ---");
             }
         } catch (Exception e) {
-           LogUtils.info(e.getStackTrace());
+            LogUtils.info(e.getStackTrace());
         }
         return p;
     }
@@ -46,7 +44,7 @@ public class ConfigFactory {
     }
 
     public static String get(String key) {
-       return getProperties().getProperty(key);
+        return getProperties().getProperty(key);
     }
 
     public static boolean getBoolean(String key) {
@@ -58,8 +56,6 @@ public class ConfigFactory {
     }
 
     public static int getInt(String key) {
-           return Integer.parseInt(properties.getProperty(key));
-        }
-
+        return Integer.parseInt(properties.getProperty(key));
+    }
 }
-

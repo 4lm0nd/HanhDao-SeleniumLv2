@@ -1,22 +1,27 @@
 package org.seleLv2.pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.Messages;
 import org.seleLv2.data.ProductInfo;
+import org.seleLv2.drivers.DriverManager;
 import org.seleLv2.utils.AssertUtils;
+import org.seleLv2.utils.DataUtils;
+import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.codeborne.selenide.Selenide.*;
-import static org.seleLv2.elements.ElementList.$$;
-import static org.seleLv2.elements.Elements.$;
+import static org.seleLv2.elements.Element.$;
+import static org.seleLv2.elements.Elements.$$;
+import static org.seleLv2.utils.DataUtils.convertToDouble;
 
 public class CartPage {
     private final String msgEmptyCard = "//div[@class='cart-empty empty-cart-block']/h1";
@@ -25,43 +30,80 @@ public class CartPage {
     private final String btnPlus = "//div[@class='quantity']//span[@class='plus']";
     private final String btnMinus = "//div[@class='quantity']//span[@class='minus']";
     private final String btnUpdateCard = "//button[@name='update_cart']";
+    private final String btnRemove = "//a[@title='Remove this item']";
 
     public void removeItem() {
-        String btnRemove = "//td[@class='product-details']//a[@title='Remove this item']";
-        $(btnRemove).scrollTo();
-        $(btnRemove).click();
+
+            WebElement item =
+                    $(btnRemove).find();
+
+            item.click();
+
+        WaitUtils.waitForStaleness(item);
     }
 
     public void removeAllItems() {
-        while (!$(msgEmptyCard).isVisible()) {
-            removeItem();
+        int maxAttempts = 20;
+
+        while ( $(btnRemove).exists() && maxAttempts > 0) {
+            try {
+                removeItem();
+
+                Thread.sleep(1000);
+            } catch (Exception e) {
+
+                break;
+            }
+            maxAttempts--;
         }
     }
 
     public void clearCard() {
         $(btnClearCard).click();
-        Alert alert = switchTo().alert();
-        alert.accept();
+        DriverManager.acceptAlert();
     }
 
     public void goCheckOutProcess() {
-        if ($(msgEmptyCard).isVisible()) {
-            refresh();
+        if ($(msgEmptyCard).exists()) {
+            DriverManager.refreshPage();
         }
         String btnCheckOut = "//a[contains(text(),'Proceed to checkout')]";
         $(btnCheckOut).click();
     }
-
     public List<ProductInfo> getProductsInCart() {
+
         List<ProductInfo> products = new ArrayList<>();
-        String tableProduct = "//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']//tbody";
-        ElementsCollection rows = $$(tableProduct + "//tr").gets();
-        for (SelenideElement row : rows) {
-            String name = row.$("td.product-details").getText();
-            String price = row.$("td.product-price").getText();
-            String quantity = row.$("td.product-quantity input").getValue();
-            products.add(new ProductInfo(name, price, quantity));
+
+        String tableProduct =
+                "//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']//tbody";
+
+        List<WebElement> rows =
+                $$(tableProduct + "//tr").gets();
+
+        for (WebElement row : rows) {
+
+            String name =
+                    row.findElement(
+                                    By.cssSelector("td.product-details"))
+                            .getText();
+
+            String price =
+                    row.findElement(
+                                    By.cssSelector("td.product-price"))
+                            .getText();
+
+            String quantity =
+                    row.findElement(
+                                    By.cssSelector("td.product-quantity input"))
+                            .getAttribute("value");
+
+            products.add(
+                    new ProductInfo(
+                            name,
+                            price,
+                            quantity));
         }
+
         return products;
     }
 
@@ -92,8 +134,8 @@ public class CartPage {
     }
 
     public void verifyShoppingCardIsEmpty() {
-        if ($(msgEmptyCard).isVisible()) {
-            AssertUtils.assertContains($(msgEmptyCard).text(), Messages.MSG_EMPTY_CARD.getMessage(),Constant.shortTime);
+        if ($(msgEmptyCard).exists()) {
+            AssertUtils.assertContains(()->$(msgEmptyCard).text(), Messages.MSG_EMPTY_CARD.getMessage());
         } else {
             Assert.fail("Shopping Card Is Not Empty");
         }
@@ -101,50 +143,53 @@ public class CartPage {
 
     public void clickPlusBtn() {
         $(btnPlus).click();
-        WaitUtils.waitUntilElementEnable($x(btnPlus), Constant.timeout);
+
     }
 
     public void clickMinusBtn() {
         $(btnMinus).click();
-        WaitUtils.waitUntilElementEnable($x(btnMinus), Constant.timeout);
+
     }
 
     public void enterQuantity(String value) {
         $(txtQuantity).type(value);
         $(btnUpdateCard).click();
-        WaitUtils.waitUntilElementEnable($x(btnUpdateCard), Constant.timeout);
     }
 
     public void verifySubTotal(String actQuantity) {
-        String priceText = $x("//td[@class='product-price']")
-                .getText();
-        String actSubtotal = $x("//td[@class='product-subtotal']")
-                .getText();
-        double price = Double.parseDouble(
-                priceText.replace("$", "").trim()
-        );
-        int quantity = Integer.parseInt(actQuantity);
-        double expSubtotal = price * quantity;
 
-        Assert.assertTrue(
-                actSubtotal.contains(String.format("%.2f", expSubtotal)),
-                "Subtotal is incorrect. Actual: " + actSubtotal + " Expected: " + expSubtotal
+        String priceText = $("//td[@class='product-price']").text();
+        String subtotalText = $("//td[@class='product-subtotal']").text();
+
+        double price = DataUtils.convertToDouble(priceText);
+        double actualSubtotal = DataUtils.convertToDouble(subtotalText);
+
+        int quantity = Integer.parseInt(actQuantity);
+
+        double expectedSubtotal = price * quantity;
+
+        LogUtils.info("the actualSubtotal is _" + actualSubtotal + "and the expectedSubtotal is _" + expectedSubtotal);
+
+        Assert.assertEquals(
+                actualSubtotal,
+                expectedSubtotal,
+                0.01,
+                "Subtotal is incorrect"
         );
+
     }
 
     public void verifyQuantity(String expQuantity) {
 
-        String actQuantity = $x("//td[@class='product-quantity']//input")
-                .getValue();
+        String actQuantity =
+                $("//td[@class='product-quantity']//input")
+                        .value();
 
-        assert actQuantity != null;
         Assert.assertEquals(
                 actQuantity,
                 expQuantity,
                 "Quantity is incorrect"
         );
-
-
     }
 }
 

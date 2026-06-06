@@ -1,13 +1,15 @@
 package org.seleLv2.pages;
 
-import com.codeborne.selenide.Condition;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.seleLv2.common.enums.HeaderItems;
+import org.seleLv2.drivers.DriverManager;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.UrlUtils;
-
-import static com.codeborne.selenide.Selenide.*;
-import static org.seleLv2.elements.Elements.$;
+import static org.seleLv2.elements.Element.$;
+import static org.seleLv2.elements.Elements.$$;
 
 
 public class HeaderPage {
@@ -26,16 +28,33 @@ public class HeaderPage {
     }
 
     public void selectHeaderMenu(String item) {
-        String itemLink = String.format(link, UrlUtils.getUrl(item));
-        if ($(itemLink).isVisible()) {
-            $(itemLink).scrollTo().click();
-        } else {
-            $$x(itemLink).findBy(Condition.visible).scrollTo().click();
+
+        String itemLink =
+                String.format(link,
+                        UrlUtils.getUrl(item));
+
+        for (WebElement element : $$(itemLink).gets()) {
+
+            if (element.isDisplayed()) {
+
+                new Actions(DriverManager.getDriver())
+                        .moveToElement(element)
+                        .perform();
+
+                element.click();
+
+                return;
+            }
         }
-    }
+
+            throw new NoSuchElementException(
+                    "No visible menu found: " + item
+            );
+        }
+
 
     public void goToShoppingCard(){
         selectHeaderMenu(HeaderItems.SHOPPING_CARD.getItems());
-        refresh();
+        DriverManager.refreshPage();
     }
 }

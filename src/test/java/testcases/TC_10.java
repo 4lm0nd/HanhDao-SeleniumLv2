@@ -32,8 +32,8 @@ public class TC_10 extends BaseTest {
         int count1 = productDetail.countReview();
         productDetail.submitReview(RatingReview.GOOD.getRating(),review);
         productDetail.openReviewTab();
-        WaitUtils.waitForPageLoad(Constant.shortTime);
-        AssertUtils.assertContains(productDetail.getLatestReview(),review,Constant.shortTime);
+        WaitUtils.waitForPageLoad(Constant.timeInSecond);
+        AssertUtils.assertContains(productDetail::getLatestReview,review);
         int count2 = productDetail.countReview();
         Assert.assertEquals(count1 + 1, count2);
 
