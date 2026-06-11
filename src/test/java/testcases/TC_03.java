@@ -15,8 +15,6 @@ import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.refresh;
-
 public class TC_03 extends BaseTest {
     String account = Constant.account;
     String password = Constant.password;
@@ -46,7 +44,7 @@ public class TC_03 extends BaseTest {
         cartPage.removeAllItems();
         headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
         productList.addProductsToCart(1,"1");
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForPageLoad(Constant.timeInSecond);
         headerPage.goToShoppingCard();
         cartPage.goCheckOutProcess();
         checkOutPage.selectPaymentMethod(paymentMethod);
@@ -54,8 +52,8 @@ public class TC_03 extends BaseTest {
         LogUtils.info("Complete the payment process and Verify the order");
         Billing billing = new Billing(firstname, lastname, street, town, zipcode, phone, emailTC03);
         checkOutPage.placeOrder(billing);
-        WaitUtils.waitForPageLoad(Constant.timeout);
-        AssertUtils.assertEquals(orderStatusPage.getMgsOrderConfirmation(), Messages.MSG_ORDER_CONFIRMATION.getMessage(),Constant.shortTime);
-        AssertUtils.assertContains(orderStatusPage.getPaymentInfo(), paymentName,Constant.shortTime);
+        WaitUtils.waitForProcessing("order-received");
+        AssertUtils.assertEquals(orderStatusPage::getMgsOrderConfirmation, Messages.MSG_ORDER_CONFIRMATION.getMessage());
+        AssertUtils.assertContains(orderStatusPage::getPaymentInfo, paymentName);
     }
 }

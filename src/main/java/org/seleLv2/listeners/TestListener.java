@@ -1,6 +1,8 @@
 package org.seleLv2.listeners;
 
-import com.codeborne.selenide.WebDriverRunner;
+
+import org.openqa.selenium.WebDriver;
+import org.seleLv2.drivers.DriverManager;
 import org.seleLv2.utils.HtmlCaptureUtils;
 import org.seleLv2.utils.LogUtils;
 import org.testng.ITestListener;
@@ -12,26 +14,26 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
 
-        try {
-            String testName = result.getMethod().getMethodName();
+            try {
 
-            // check driver đã start chưa
-            if (!WebDriverRunner.hasWebDriverStarted()) {
-                LogUtils.info("Driver not started - skip capture");
-                return;
+                WebDriver driver = DriverManager.getDriver();
+                String testName = result.getMethod().getMethodName();
+
+                try {
+                    ScreenshotUtils.takeScreenshot(driver, testName);
+                } catch (Exception e) {
+                    LogUtils.info("Failed to capture screenshot", e);
+                }
+
+                try {
+                    String htmlPath = HtmlCaptureUtils.save(testName);
+                    LogUtils.info("Captured HTML: " + htmlPath);
+                } catch (Exception e) {
+                    LogUtils.info("Failed to capture HTML", e);
+                }
+
+            } catch (Exception e) {
+                LogUtils.info("Error in onTestFailure", e);
             }
-
-            // screenshot
-            String screenshotPath = ScreenshotUtils.takeScreenshot(testName);
-
-            // html
-            String htmlPath = HtmlCaptureUtils.save(testName);
-
-            LogUtils.info("Captured screenshot: " + screenshotPath);
-            LogUtils.info("Captured HTML: " + htmlPath);
-
-        } catch (Exception e) {
-            LogUtils.info("Error in onTestFailure", e);
         }
-    }
 }

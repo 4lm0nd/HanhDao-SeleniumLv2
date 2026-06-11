@@ -33,9 +33,9 @@ public class OrdersHistoryPage {
         for (int i = 0; i < expected.size(); i++) {
             OrderInfo exp = expected.get(expected.size() -1-i);
             OrderInfo act = actual.get(i);
-            AssertUtils.assertContains(act.getOrderNumber(),exp.getOrderNumber(),5);
-            AssertUtils.assertEquals(act.getDate(), exp.getDate(),5);
-            AssertUtils.assertContains(act.getTotal(), exp.getTotal(),5);
+            AssertUtils.assertContains(act::getOrderNumber,exp.getOrderNumber());
+            AssertUtils.assertEquals(act::getDate, exp.getDate());
+            AssertUtils.assertContains(act::getTotal, exp.getTotal());
         }
     }
 

@@ -3,7 +3,6 @@ package org.seleLv2.drivers;
 import java.util.Properties;
 
 public class ConfigManager {
-
     private static  Properties props ;
 
     static {
@@ -47,4 +46,3 @@ public class ConfigManager {
         return Long.parseLong(get(key));
     }
 }
-

@@ -11,13 +11,8 @@ import org.seleLv2.pages.OrderStatusPage;
 import org.seleLv2.pages.ProductList;
 import org.seleLv2.utils.AssertUtils;
 import org.seleLv2.utils.DataUtils;
-import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
-
 
 public class TC_06 extends BaseTest {
     private final HeaderPage headerPage = new HeaderPage();
@@ -34,12 +29,12 @@ public class TC_06 extends BaseTest {
     @Test
     public void TC06(){
         headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
-        Assert.assertTrue(productList.isGridViewActive());
+        AssertUtils.assertActiveMode(productList.isGridViewActive());
         productList.switchView("list");
-        WaitUtils.waitForPageLoad(Constant.timeout);
-        Assert.assertTrue(productList.isListViewActive());
+        WaitUtils.waitForProcessing("list");
+        AssertUtils.assertActiveMode(productList.isListViewActive());
         Billing billing = new Billing(firstname, lastname, street, town, zipcode, phone, emailTC06);
-        PlaceOrders.placeOrderMultipleTimes(billing,1);
-        AssertUtils.assertEquals(orderStatusPage.getMgsOrderConfirmation(), Messages.MSG_ORDER_CONFIRMATION.getMessage(),Constant.shortTime);
+        PlaceOrders.placeOrderProcess(billing,1);
+        AssertUtils.assertEquals(orderStatusPage::getMgsOrderConfirmation, Messages.MSG_ORDER_CONFIRMATION.getMessage());
     }
 }

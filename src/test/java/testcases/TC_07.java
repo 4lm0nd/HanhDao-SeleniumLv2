@@ -9,7 +9,6 @@ import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.refresh;
 
 public class TC_07 extends BaseTest {
 
@@ -23,7 +22,7 @@ public class TC_07 extends BaseTest {
     public void TC07() {
         headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
         productList.addProductsToCart(1,"1");
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForPageLoad(Constant.timeInSecond);
         headerPage.goToShoppingCard();
         cartPage.goCheckOutProcess();
 

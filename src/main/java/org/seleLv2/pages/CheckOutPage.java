@@ -1,25 +1,23 @@
 package org.seleLv2.pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.Messages;
 import org.seleLv2.data.Billing;
 import org.seleLv2.data.ProductInfo;
+import org.seleLv2.elements.Element;
 import org.seleLv2.utils.UrlUtils;
-import org.seleLv2.utils.WaitUtils;
 import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
 import static org.apache.commons.lang3.math.NumberUtils.toDouble;
-import static org.seleLv2.elements.ElementList.$$;
-import static org.seleLv2.elements.Elements.$;
+import static org.seleLv2.elements.Element.$;
+import static org.seleLv2.elements.Elements.$$;
 import static org.seleLv2.utils.AssertUtils.retryAssert;
 
 public class CheckOutPage {
@@ -66,19 +64,37 @@ public class CheckOutPage {
 
     public void placeOrder(Billing billing) {
         fillBilling(billing);
-        WaitUtils.waitForPageLoad(Constant.timeout);
         $(btnPlaceOrder).click();
     }
 
     public List<ProductInfo> getCheckOutProducts() {
+
         List<ProductInfo> products = new ArrayList<>();
-        ElementsCollection rows = $$(tableReview + "//tr").gets();
+
+        List<WebElement> rows =
+                $$(tableReview + "//tr").gets();
+
         String quantity = "1";
-        for (SelenideElement row : rows) {
-            String name = row.$("td.product-name").getText();
-            String price = row.$("td.product-total").getText();
-            products.add(new ProductInfo(name, price, quantity));
+
+        for (WebElement row : rows) {
+
+            String name =
+                    row.findElement(
+                                    By.cssSelector("td.product-name"))
+                            .getText();
+
+            String price =
+                    row.findElement(
+                                    By.cssSelector("td.product-total"))
+                            .getText();
+
+            products.add(
+                    new ProductInfo(
+                            name,
+                            price,
+                            quantity));
         }
+
         return products;
     }
 
@@ -99,6 +115,7 @@ public class CheckOutPage {
 
     public void verifyTextboxHighlighted() {
 
+
         List<String> textboxes = List.of(
                 txtFirstName,
                 txtLastName,
@@ -116,28 +133,30 @@ public class CheckOutPage {
                 "border-left-color"
         );
 
-    retryAssert(() ->
+        retryAssert(() ->
 
-            textboxes.forEach(locator -> {
+                        textboxes.forEach(locator -> {
 
-                SelenideElement element = $x(locator);
+                            borderProperties.forEach(property -> {
 
-                borderProperties.forEach(property -> {
+                                String actualColor =
+                                        Color.fromString(
+                                                $(locator)
+                                                        .cssValue(property)
+                                        ).asHex();
 
-                    String actualColor = Color.fromString(
-                            element.getCssValue(property)
-                    ).asHex();
+                                Assert.assertEquals(
+                                        actualColor,
+                                        ERROR_COLOR,
+                                        "Incorrect color for property: "
+                                                + property
+                                );
+                            });
+                        }),
 
-                    Assert.assertEquals(
-                            actualColor,
-                            ERROR_COLOR,
-                            "Incorrect color for property: " + property
-                    );
-                });
-            }),
-            5,
-            100
-            );
+                Constant.timeInSecond,
+                Constant.timeInMilliSecond
+        );
 
     }
 
@@ -154,13 +173,25 @@ public class CheckOutPage {
 
         retryAssert(() ->
 
-        validations.forEach((locator, message) ->
-                $x(locator).shouldBe(enabled).shouldHave(exactText(message))
-        ),
-                5,
-                100
-        );
+                        validations.forEach((locator, expectedMessage) -> {
 
+                            Element element = $(locator);
+
+                            Assert.assertTrue(
+                                    element.isEnabled(),
+                                    "Element is disabled: " + locator
+                            );
+
+                            Assert.assertEquals(
+                                    element.text(),
+                                    expectedMessage,
+                                    "Incorrect validation message"
+                            );
+                        }),
+
+                Constant.timeInSecond,
+                Constant.timeInMilliSecond
+        );
     }
 }
 

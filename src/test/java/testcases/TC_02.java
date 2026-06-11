@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.refresh;
+
 
 public class TC_02 extends BaseTest {
     String account = Constant.account;
@@ -49,7 +49,7 @@ public class TC_02 extends BaseTest {
 
         headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
         List <ProductInfo> addedProductsToCart = productList.addProductsToCart(3,"1");
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForPageLoad(Constant.timeInSecond);
         headerPage.goToShoppingCard();
         cartPage.verifyCartProducts(addedProductsToCart);
 
@@ -57,10 +57,10 @@ public class TC_02 extends BaseTest {
         cartPage.goCheckOutProcess();
         Billing billing = new Billing(firstname, lastname, street, town, zipcode, phone, emailTC02);
         checkOutPage.placeOrder(billing);
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForPageLoad(Constant.timeInSecond);
 
         LogUtils.info("All selected items are purchased and order confirmation is received");
         orderStatusPage.verifyProductsInOrder(addedProductsToCart);
-        AssertUtils.assertEquals(orderStatusPage.getMgsOrderConfirmation(), Messages.MSG_ORDER_CONFIRMATION.getMessage(),Constant.shortTime);
+        AssertUtils.assertEquals(orderStatusPage::getMgsOrderConfirmation, Messages.MSG_ORDER_CONFIRMATION.getMessage());
     }
 }

@@ -1,10 +1,9 @@
 package org.seleLv2.pages;
 
-import org.openqa.selenium.Keys;
 import org.seleLv2.utils.LogUtils;
 
-import static com.codeborne.selenide.Selenide.*;
-import static org.seleLv2.elements.Elements.$;
+import static org.seleLv2.elements.Element.$;
+import static org.seleLv2.elements.Elements.$$;
 
 public class ProductDetail {
 
@@ -27,17 +26,24 @@ public class ProductDetail {
 
     public String getLatestReview() {
 
-        if ($(latestReview).isVisible()) {
-            $(latestReview).text();
-            return $(latestReview).text();
+        if ($(latestReview).exists()) {
+              return $(latestReview).text();
         }
         LogUtils.info("Review Not Found");
         return null;
     }
 
-    public int countReview(){
-        int totalComments = $$x("//ol[@class='commentlist']/li//div[@class='description']").size();
-        LogUtils.info(totalComments);
+    private static final String REVIEWS =
+            "//ol[@class='commentlist']/li//div[@class='description']";
+
+    public int countReview() {
+
+        int totalComments =
+                $$(REVIEWS).size();
+
+        LogUtils.info("Total reviews: " + totalComments);
+
         return totalComments;
     }
-}
+
+   }

@@ -1,27 +1,20 @@
 package org.seleLv2.utils;
 
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
+import org.seleLv2.elements.Element;
 
-import static com.codeborne.selenide.Condition.disappear;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static org.seleLv2.elements.Element.$;
 
 public class CookieUtils {
 
-    private static final By BTN_ACCEPT =
-            By.xpath("//a[@id='cn-accept-cookie']");
+    private static final String btn_Accept =
+            "//a[@id='cn-accept-cookie']";
 
     public static void acceptCookiesIfPresent() {
 
-        SelenideElement btn = $(BTN_ACCEPT);
+        Element btnAccept = $(btn_Accept);
 
-        if (btn.exists()) {
-
-            btn.shouldBe(visible)
-                    .click();
-
-            btn.should(disappear);
+        if (btnAccept.exists()) {
+            btnAccept.click();
         }
     }
 }

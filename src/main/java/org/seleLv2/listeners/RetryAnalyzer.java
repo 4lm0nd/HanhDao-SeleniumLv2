@@ -1,6 +1,5 @@
 package org.seleLv2.listeners;
 
-
 import org.seleLv2.drivers.ConfigFactory;
 import org.seleLv2.utils.LogUtils;
 import org.testng.IRetryAnalyzer;
@@ -12,11 +11,13 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult result) {
-        if (count < maxRetry) {
-            count++;
-            LogUtils.info("Retry " + count + " for: " + result.getName());
-            return true;
+
+            if (count < maxRetry) {
+                count++;
+                LogUtils.info("Retry " + count + " for: " + result.getName());
+                return true;
+            }
+            return false;
         }
-        return false;
     }
-}
+

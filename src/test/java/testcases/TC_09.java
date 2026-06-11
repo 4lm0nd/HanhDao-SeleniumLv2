@@ -28,21 +28,22 @@ public class TC_09 extends BaseTest {
         headerPage.selectHeaderMenu(HeaderItems.TAB_SHOP.getItems());
         productList.addProductsToCart(1,"1");
         headerPage.goToShoppingCard();
+
         cartPage.verifyQuantity("1");
+
         cartPage.clickPlusBtn();
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForElementUpdate();
         cartPage.verifyQuantity("2");
-        WaitUtils.waitForPageLoad(Constant.timeout);
         cartPage.verifySubTotal("2");
+
         cartPage.enterQuantity("4");
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForElementUpdate();
         cartPage.verifyQuantity("4");
-        WaitUtils.waitForPageLoad(Constant.timeout);
         cartPage.verifySubTotal("4");
+
         cartPage.clickMinusBtn();
-        WaitUtils.waitForPageLoad(Constant.timeout);
+        WaitUtils.waitForElementUpdate();
         cartPage.verifyQuantity("3");
-        WaitUtils.waitForPageLoad(Constant.timeout);
         cartPage.verifySubTotal("3");
     }
 }

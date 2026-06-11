@@ -1,13 +1,14 @@
 package org.seleLv2.elements;
 
-import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.seleLv2.drivers.DriverManager;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Selenide.*;
-
-public class Tables extends Elements {
+public class Tables extends Element {
 
     private final String xpath;
 
@@ -16,26 +17,43 @@ public class Tables extends Elements {
         this.xpath = xpath;
     }
 
-    public static Tables $(String xpath) {
-        return new Tables(xpath);
-    }
 
     public static List<String> getColumnValuesByHeader(String headerName) {
-        List<SelenideElement> headers = $$("table thead th");
+
+        WebDriver driver = DriverManager.getDriver();
+
+        List<WebElement> headers =
+                driver.findElements(By.cssSelector("table thead th"));
 
         int columnIndex = -1;
+
         for (int i = 0; i < headers.size(); i++) {
-            if (headers.get(i).getText().trim().equalsIgnoreCase(headerName)) {
-                columnIndex = i + 1; // XPath index bắt đầu từ 1
+
+            String headerText = headers.get(i)
+                    .getText()
+                    .trim();
+
+            if (headerText.equalsIgnoreCase(headerName)) {
+                columnIndex = i + 1; // XPath bắt đầu từ 1
                 break;
             }
         }
 
         if (columnIndex == -1) {
-            throw new RuntimeException("Header not found: " + headerName);
+            throw new RuntimeException(
+                    "Header not found: " + headerName);
         }
 
-     return $$x("//table/tbody/tr/td[" + columnIndex + "]")
-                .texts();
+        List<WebElement> cells =
+                driver.findElements(
+                        By.xpath("//table/tbody/tr/td[" + columnIndex + "]"));
+
+        List<String> values = new ArrayList<>();
+
+        for (WebElement cell : cells) {
+            values.add(cell.getText().trim());
+        }
+
+        return values;
     }
 }

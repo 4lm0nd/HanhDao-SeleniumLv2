@@ -8,11 +8,7 @@ import org.seleLv2.pages.AccountPage;
 import org.seleLv2.pages.CartPage;
 import org.seleLv2.pages.HeaderPage;
 import org.seleLv2.pages.ProductList;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static com.codeborne.selenide.Selenide.refresh;
-import static org.seleLv2.elements.Elements.$;
 
 public class TC_08 extends BaseTest {
 
