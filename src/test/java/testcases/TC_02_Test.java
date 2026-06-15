@@ -19,12 +19,12 @@ import java.util.List;
 
 
 
-public class TC_02 extends BaseTest {
+public class TC_02_Test extends BaseTest {
     String account = Constant.account;
     String password = Constant.password;
     private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
-    private final ProductList productList = new ProductList();
+    private final ManageProduct productList = new ManageProduct();
     private final CartPage cartPage = new CartPage();
     private final CheckOutPage checkOutPage = new CheckOutPage();
     private final OrderStatusPage orderStatusPage = new OrderStatusPage();

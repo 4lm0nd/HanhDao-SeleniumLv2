@@ -3,11 +3,9 @@ package org.seleLv2.utils;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.DataTypes;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class DataUtils {
@@ -30,7 +28,7 @@ public class DataUtils {
     }
 
 
-    public static String normalize(String text) {
+    public static String normalizeProductName(String text) {
         return text
                 .replace("× 1", "")
                 .trim()
@@ -66,6 +64,14 @@ public class DataUtils {
                 })
                 .orElse(DataTypes.STRING);
     }
+
+    public static String normalizeTestSpacing(String input) {
+        return input
+                .replace("\u00A0", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
+    }
+
 
 }
 

@@ -12,6 +12,8 @@ import org.seleLv2.common.constant.Constant;
 import org.seleLv2.drivers.DriverManager;
 
 import java.time.Duration;
+import java.util.function.BooleanSupplier;
+
 
 public class WaitUtils {
 
@@ -56,4 +58,40 @@ public class WaitUtils {
                         By.cssSelector(".blockUI.blockOverlay")
                 ));
     }
+
+
+    public static boolean retryWait(
+            BooleanSupplier condition,
+            int timeoutSeconds,
+            int pollingMillis){
+
+        long endTime = System.currentTimeMillis()
+                + timeoutSeconds * 1000L;
+
+        while (System.currentTimeMillis() < endTime) {
+
+            try {
+
+                if (condition.getAsBoolean()) {
+                    return true;
+                }
+
+            } catch (Exception ignored) {
+            }
+
+            sleep(pollingMillis);
+        }
+
+        return false;
+    }
+
+    public static void sleep(int millis) {
+
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
 }

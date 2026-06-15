@@ -2,8 +2,8 @@
 <suite name="Parallel Suite" parallel="classes" thread-count="1">
     <test name="Test Run">
         <classes>
-            <class name="testcases.TC_08"/>
-            <class name="testcases.TC_09"/>
+            <class name="testcases.TC_01_Test"/>
+
         </classes>
     </test>
     <listeners>

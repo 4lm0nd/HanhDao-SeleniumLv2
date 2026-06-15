@@ -24,7 +24,7 @@ public class CheckOutPage {
 
     private final String link = "//a[@href='%s']";
     private final String href = UrlUtils.getUrl("checkout/");
-    public final String btnPlaceOrder = "//button[@id='place_order']";
+    private final String btnPlaceOrder = "//button[@id='place_order']";
     private final String txtFirstName = "//input[@id='billing_first_name']";
     private final String txtLastName = "//input[@id='billing_last_name']";
     private final String txtStreet = "//input[@id='billing_address_1']";
@@ -103,6 +103,7 @@ public class CheckOutPage {
     }
 
     public void verifyCheckOutProducts(List<ProductInfo> expected) {
+
         List<ProductInfo> actual = getCheckOutProducts();
         for (ProductInfo exp : expected) {
             boolean found = actual.stream().anyMatch(act ->
@@ -114,7 +115,6 @@ public class CheckOutPage {
     }
 
     public void verifyTextboxHighlighted() {
-
 
         List<String> textboxes = List.of(
                 txtFirstName,
@@ -134,11 +134,8 @@ public class CheckOutPage {
         );
 
         retryAssert(() ->
-
                         textboxes.forEach(locator -> {
-
                             borderProperties.forEach(property -> {
-
                                 String actualColor =
                                         Color.fromString(
                                                 $(locator)
@@ -172,16 +169,12 @@ public class CheckOutPage {
         );
 
         retryAssert(() ->
-
                         validations.forEach((locator, expectedMessage) -> {
-
                             Element element = $(locator);
-
                             Assert.assertTrue(
                                     element.isEnabled(),
                                     "Element is disabled: " + locator
                             );
-
                             Assert.assertEquals(
                                     element.text(),
                                     expectedMessage,

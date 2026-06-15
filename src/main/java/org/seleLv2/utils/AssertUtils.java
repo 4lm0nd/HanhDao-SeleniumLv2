@@ -4,56 +4,37 @@ import org.apache.hc.core5.function.Supplier;
 import org.seleLv2.common.constant.Constant;
 import org.testng.Assert;
 
+import static org.seleLv2.utils.DataUtils.normalizeTestSpacing;
+import static org.seleLv2.utils.WaitUtils.sleep;
 
 
 public class AssertUtils {
 
-    public static void assertEquals(
-            Supplier<String> actualSupplier,
-            String expected) {
-
-        retryAssert(() -> {
+    public static void assertEquals(Supplier<String> actualSupplier,  String expected) {
 
             String actual = actualSupplier.get();
-
             Assert.assertEquals(
                     actual,
                     expected,
                     String.format(
                             "Expected [%s] but got [%s]",
-                            expected,
-                            actual)
-            );
-
-        }, Constant.timeInSecond, Constant.timeInMilliSecond);
+                            expected,actual
+                    ));
     }
 
-    public static void assertContains(
-            Supplier<String> actualSupplier,
-            String expected) {
-
-        retryAssert(() -> {
-
+    public static void assertContains(Supplier<String> actualSupplier, String expected) {
             String actual = actualSupplier.get();
-
             Assert.assertTrue(
-                    normalize(actual)
+                    normalizeTestSpacing(actual)
                             .toLowerCase()
                             .contains(
-                                    normalize(expected)
+                                    normalizeTestSpacing(expected)
                                             .toLowerCase()
                             )
             );
 
-        }, Constant.timeInSecond, 100);
     }
 
-    private static String normalize(String input) {
-        return input
-                .replace("\u00A0", " ")
-                .replaceAll("\\s+", " ")
-                .trim();
-    }
 
     public static void retryAssert(
             Runnable assertion,
@@ -82,19 +63,10 @@ public class AssertUtils {
         throw lastError;
     }
 
-    private static void sleep(int millis) {
 
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
-
-
-    public static void assertActiveMode(boolean activeMode) {
+    public static void assertActiveMode(boolean activeMode, int timeOut) {
         retryAssert(() -> Assert.assertTrue(activeMode),
-                Constant.timeInSecond,
+                timeOut,
                 Constant.timeInMilliSecond);
 
     }

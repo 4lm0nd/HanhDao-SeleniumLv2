@@ -15,15 +15,11 @@ public class ConfigManager {
     }
 
     public static String get(String key) {
-        // 1. Ưu tiên System Property (-D)
         String value = System.getProperty(key);
         if (value != null) return value;
 
-        // 2. Ưu tiên Env Var
         value = System.getenv(key);
         if (value != null) return value;
-
-        // 3. Lấy từ file (nếu props không null và có key)
         value = props.getProperty(key);
 
         if (value == null) {
@@ -34,15 +30,4 @@ public class ConfigManager {
         return value;
     }
 
-    public static boolean getBoolean(String key) {
-        return Boolean.parseBoolean(get(key));
-    }
-
-    public static int getInt(String key) {
-        return Integer.parseInt(get(key));
-    }
-
-    public static long getLong(String key) {
-        return Long.parseLong(get(key));
-    }
 }

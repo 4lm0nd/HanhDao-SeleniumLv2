@@ -17,7 +17,6 @@ public class Tables extends Element {
         this.xpath = xpath;
     }
 
-
     public static List<String> getColumnValuesByHeader(String headerName) {
 
         WebDriver driver = DriverManager.getDriver();

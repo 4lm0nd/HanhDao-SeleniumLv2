@@ -1,6 +1,5 @@
 package org.seleLv2.listeners;
 
-
 import org.openqa.selenium.WebDriver;
 import org.seleLv2.drivers.DriverManager;
 import org.seleLv2.utils.HtmlCaptureUtils;

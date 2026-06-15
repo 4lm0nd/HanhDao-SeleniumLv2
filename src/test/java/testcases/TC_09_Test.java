@@ -2,22 +2,21 @@ package testcases;
 
 import base.BaseTest;
 
-import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.HeaderItems;
 import org.seleLv2.pages.AccountPage;
 import org.seleLv2.pages.CartPage;
 import org.seleLv2.pages.HeaderPage;
-import org.seleLv2.pages.ProductList;
+import org.seleLv2.pages.ManageProduct;
 import org.seleLv2.utils.DataUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.annotations.Test;
 
 
-public class TC_09 extends BaseTest {
+public class TC_09_Test extends BaseTest {
 
     private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
-    private final ProductList productList = new ProductList();
+    private final ManageProduct productList = new ManageProduct();
     private final CartPage cartPage = new CartPage();
     private final String emailTC09 = "TC09" + DataUtils.convertDateToString() + "@yopmail.com";
 

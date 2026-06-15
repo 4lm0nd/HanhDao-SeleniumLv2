@@ -1,6 +1,5 @@
 package org.seleLv2.business;
 
-
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.HeaderItems;
 import org.seleLv2.data.Billing;
@@ -19,7 +18,7 @@ import static org.seleLv2.utils.WaitUtils.waitForPageLoad;
 public class PlaceOrders {
 
     private static final HeaderPage headerPage = new HeaderPage();
-    private static final ProductList productList = new ProductList();
+    private static final ManageProduct productList = new ManageProduct();
     private static final CartPage cartPage = new CartPage();
     private static final CheckOutPage checkOutPage = new CheckOutPage();
     private static final OrderStatusPage orderStatusPage = new OrderStatusPage();

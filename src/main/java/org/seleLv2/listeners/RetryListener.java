@@ -1,6 +1,5 @@
 package org.seleLv2.listeners;
 
-
 import org.seleLv2.utils.LogUtils;
 import org.testng.annotations.ITestAnnotation;
 import org.testng.IAnnotationTransformer;

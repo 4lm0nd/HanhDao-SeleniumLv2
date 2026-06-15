@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.data.ProductInfo;
-import org.seleLv2.drivers.DriverManager;
-import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.Assert;
 
@@ -15,20 +13,24 @@ import java.util.List;
 import static org.apache.commons.lang3.math.NumberUtils.toDouble;
 import static org.seleLv2.common.enums.Conditions.VISIBLE;
 import static org.seleLv2.elements.Element.$;
-import static org.seleLv2.utils.DataUtils.normalize;
+import static org.seleLv2.elements.Elements.$$;
+import static org.seleLv2.utils.DataUtils.normalizeProductName;
 
 public class OrderStatusPage {
+
     public final String tableProduct = "//table[@class='woocommerce-table woocommerce-table--order-details shop_table order_details']//tbody";
+    private final String tabOrderStatus = "//a[@href and contains(text(),'Order status')]";
+    private final String tableBilling = "//section[contains(@class,'woocommerce-customer-details')]//address";
+    private final String mgsOrderConfirmation = "//div[@class='woocommerce-order']/p[1]";
+    private final String paymentInfo = "//li[@class='woocommerce-order-overview__payment-method method']/strong";
 
     public String getPageHeader() {
-        String tabOrderStatus = "//a[@href and contains(text(),'Order status')]";
         $(tabOrderStatus).text();
         return $(tabOrderStatus).text();
     }
 
     public String getTableBilling() {
         WaitUtils.waitForPageLoad(Constant.timeInSecond);
-        String tableBilling = "//section[contains(@class,'woocommerce-customer-details')]//address";
         $(tableBilling).shouldBe(VISIBLE);
         return $(tableBilling).text();
     }
@@ -39,21 +41,7 @@ public class OrderStatusPage {
 
         List<ProductInfo> products = new ArrayList<>();
 
-        WebElement table =
-                DriverManager.getDriver().findElement(
-                        By.xpath("//table[contains(@class,'order_details')]"));
-
-
-
-        List<WebElement> rows =
-                DriverManager.getDriver().findElements(
-                        By.xpath(tableProduct + "//tr"));
-
-        System.out.println(
-                "Rows by Selenium = "
-                        + rows.size());
-
-        LogUtils.info("Rows found = " + rows.size());
+        List<WebElement> rows = $$(tableProduct + "//tr").gets();
 
         Assert.assertFalse(
                 rows.isEmpty(),
@@ -62,14 +50,10 @@ public class OrderStatusPage {
         for (WebElement row : rows) {
 
             String name =
-                    row.findElement(
-                                    By.cssSelector("td.product-name"))
-                            .getText();
+                    row.findElement(By.cssSelector("td.product-name")).getText();
 
             String price =
-                    row.findElement(
-                                    By.cssSelector("td.product-total"))
-                            .getText();
+                    row.findElement(By.cssSelector("td.product-total")).getText();
 
             products.add(
                     new ProductInfo(
@@ -82,7 +66,7 @@ public class OrderStatusPage {
     }
 
     public void verifyProductsInOrder(List<ProductInfo> expected) {
-        WaitUtils.waitForPageLoad(Constant.timeInSecond);
+
         List<ProductInfo> actual = getProductsInOrder();
         System.out.println("=== EXPECTED ===");
 
@@ -99,9 +83,9 @@ public class OrderStatusPage {
         for (ProductInfo exp : expected){
             boolean found = actual.stream()
                     .anyMatch(act ->
-                            normalize(act.getProductName())
+                            normalizeProductName(act.getProductName())
                                     .equals(
-                                            normalize(exp.getProductName()))
+                                            normalizeProductName(exp.getProductName()))
                                     &&
                                     Double.compare(
                                             toDouble(act.getPrice()),
@@ -113,15 +97,11 @@ public class OrderStatusPage {
      }
 
     public String getMgsOrderConfirmation(){
-        String mgsOrderConfirmation = "//div[@class='woocommerce-order']/p[1]";
-        System.out.println(DriverManager.getDriver().getCurrentUrl());
-        System.out.println(DriverManager.getDriver().getTitle());
-        return  $(mgsOrderConfirmation).text();
+        return $(mgsOrderConfirmation).text();
 
     }
 
     public String getPaymentInfo(){
-       String paymentInfo = "//li[@class='woocommerce-order-overview__payment-method method']/strong";
        $(paymentInfo).shouldBe(VISIBLE);
        return $(paymentInfo).text();
     }

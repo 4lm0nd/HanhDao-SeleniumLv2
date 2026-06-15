@@ -28,7 +28,6 @@ public class HeaderPage {
     }
 
     public void selectHeaderMenu(String item) {
-
         String itemLink =
                 String.format(link,
                         UrlUtils.getUrl(item));

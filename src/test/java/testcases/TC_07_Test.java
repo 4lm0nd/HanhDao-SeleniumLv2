@@ -10,10 +10,10 @@ import org.seleLv2.utils.WaitUtils;
 import org.testng.annotations.Test;
 
 
-public class TC_07 extends BaseTest {
+public class TC_07_Test extends BaseTest {
 
     private final HeaderPage headerPage = new HeaderPage();
-    private final ProductList productList = new ProductList();
+    private final ManageProduct productList = new ManageProduct();
     private final CartPage cartPage = new CartPage();
     private final CheckOutPage checkOutPage = new CheckOutPage();
 
