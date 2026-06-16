@@ -32,7 +32,13 @@ public class ProductDetail {
 
     public String getLatestReview() {
 
-        boolean latestRow = retryWait(() -> $(latestReview).exists(),
+        boolean latestRow = retryWait(
+                () -> {
+                    if (!$(latestReview).exists()) {
+                        return false;
+                    }
+                    return !$(latestReview).text().trim().isEmpty();
+                },
                 Constant.timeInSecond,
                 Constant.timeInMilliSecond);
 
