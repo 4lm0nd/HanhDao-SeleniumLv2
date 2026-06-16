@@ -2,16 +2,16 @@
 <suite name="Parallel Suite" parallel="classes" thread-count="1">
     <test name="Test Run">
         <classes>
-            <class name="testcases.TC_01"/>
-            <class name="testcases.TC_02"/>
-            <class name="testcases.TC_03"/>
-            <class name="testcases.TC_04"/>
-            <class name="testcases.TC_05"/>
-            <class name="testcases.TC_06"/>
-            <class name="testcases.TC_07"/>
-            <class name="testcases.TC_08"/>
-            <class name="testcases.TC_09"/>
-            <class name="testcases.TC_10"/>
+            <class name="testcases.TC_01_Test"/>
+            <class name="testcases.TC_02_Test"/>
+            <class name="testcases.TC_03_Test"/>
+            <class name="testcases.TC_04_Test"/>
+            <class name="testcases.TC_05_Test"/>
+            <class name="testcases.TC_06_Test"/>
+            <class name="testcases.TC_07_Test"/>
+            <class name="testcases.TC_08_Test"/>
+            <class name="testcases.TC_09_Test"/>
+            <class name="testcases.TC_10_Test"/>
         </classes>
     </test>
     <listeners>

@@ -1,6 +1,7 @@
 package org.seleLv2.drivers;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
@@ -40,5 +41,15 @@ public class DriverManager {
 
     public static void refreshPage() {
         DriverManager.getDriver().navigate().refresh();
+    }
+
+    public static void setBrowserSize() {
+        String browserSize = ConfigManager.get("browserSize");
+        String[] size = browserSize.split("x");
+        DriverManager.getDriver().manage().window().setSize(
+                new Dimension(
+                        Integer.parseInt(size[0]),
+                        Integer.parseInt(size[1]))
+        );
     }
 }

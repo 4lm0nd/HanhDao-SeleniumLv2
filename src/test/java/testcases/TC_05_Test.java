@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TC_05 extends BaseTest {
+public class TC_05_Test extends BaseTest {
     private final String emailTC05 = "TC05" + DataUtils.convertDateToString() + "@yopmail.com";
     String firstname = Constant.firstname;
     String lastname = Constant.lastname;

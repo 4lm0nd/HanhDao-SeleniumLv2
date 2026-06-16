@@ -1,15 +1,12 @@
 package org.seleLv2.pages;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.seleLv2.common.constant.Constant;
 import org.seleLv2.data.ProductInfo;
 import org.seleLv2.drivers.DriverManager;
 import org.seleLv2.utils.*;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -18,15 +15,17 @@ import java.util.List;
 
 import static org.seleLv2.elements.Element.$;
 import static org.seleLv2.elements.Elements.$$;
-import static org.seleLv2.utils.AssertUtils.retryAssert;
 
 
-public class ProductList {
+public class ManageProduct {
 
     private WebElement selectedProduct;
+    private final String productList = "//div[@class='text-center product-details']//a[contains(@href,'add-to-cart')]";
+    private final String price = "//span[@class='price']";
+    private final String filterProducts = "//select[@class='orderby']";
+
 
     private List<WebElement> getItems() {
-        String productList = "//div[@class='text-center product-details']//a[contains(@href,'add-to-cart')]";
         return $$(productList).gets();
     }
 
@@ -88,25 +87,16 @@ public class ProductList {
     public void switchView(String viewAs) {
         String viewSwitcher = "//div[contains(@class,'view-switcher')]//a[contains(@href,'" + viewAs + "')]/parent::*";
 
-       if(!$(viewSwitcher).exists()) {
-           $(viewSwitcher).scrollTo().click();
-       }
-           $(viewSwitcher).click();
-       }
-
+        if (!$(viewSwitcher).exists()) {
+            $(viewSwitcher).scrollTo().click();
+        }
+        $(viewSwitcher).click();
+    }
 
     public void filterProducts(String option) {
-        String filterProducts = "//select[@class='orderby']";
-        By productLocator =
-                By.xpath("//span[@class='price']");
 
-        WebElement firstProduct =
-                DriverManager.getDriver()
-                        .findElements(productLocator)
-                        .get(0);
-
+        WebElement firstProduct = $$(price).get(0);
         $(filterProducts).selectByText(option);
-
         new WebDriverWait(
                 DriverManager.getDriver(),
                 Duration.ofSeconds(10))
@@ -115,13 +105,10 @@ public class ProductList {
 
     public boolean isSortedASC() {
 
-        String price = "//span[@class='price']";
         List<String> prices = new ArrayList<>();
 
         for (WebElement product : $$(price).gets()) {
-
             String priceText;
-
             List<WebElement> salePrice =
                     product.findElements(
                             By.xpath(".//ins//bdi"));
@@ -147,7 +134,7 @@ public class ProductList {
 
 
     public boolean isSortedDESC() {
-        String price = "//span[@class='price']";
+
         List<String> prices = new ArrayList<>();
 
         for (WebElement product : $$(price).gets()) {

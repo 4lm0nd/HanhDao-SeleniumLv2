@@ -12,10 +12,10 @@ import org.seleLv2.utils.WaitUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_10 extends BaseTest {
+public class TC_10_Test extends BaseTest {
     private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
-    private final ProductList productList = new ProductList();
+    private final ManageProduct productList = new ManageProduct();
     private final ProductDetail productDetail = new ProductDetail();
     String account = Constant.account;
     String password = Constant.password;
@@ -33,9 +33,8 @@ public class TC_10 extends BaseTest {
         productDetail.submitReview(RatingReview.GOOD.getRating(),review);
         productDetail.openReviewTab();
         WaitUtils.waitForPageLoad(Constant.timeInSecond);
-        AssertUtils.assertContains(productDetail::getLatestReview,review);
         int count2 = productDetail.countReview();
         Assert.assertEquals(count1 + 1, count2);
-
+        AssertUtils.assertContains(productDetail::getLatestReview,review);
     }
 }

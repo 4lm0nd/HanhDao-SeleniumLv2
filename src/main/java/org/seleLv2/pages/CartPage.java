@@ -2,8 +2,6 @@ package org.seleLv2.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.Messages;
 import org.seleLv2.data.ProductInfo;
@@ -14,14 +12,14 @@ import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static org.seleLv2.elements.Element.$;
 import static org.seleLv2.elements.Elements.$$;
-import static org.seleLv2.utils.DataUtils.convertToDouble;
+import static org.seleLv2.utils.WaitUtils.retryWait;
+
 
 public class CartPage {
     private final String msgEmptyCard = "//div[@class='cart-empty empty-cart-block']/h1";
@@ -31,14 +29,14 @@ public class CartPage {
     private final String btnMinus = "//div[@class='quantity']//span[@class='minus']";
     private final String btnUpdateCard = "//button[@name='update_cart']";
     private final String btnRemove = "//a[@title='Remove this item']";
+    private final String btnCheckOut = "//a[contains(text(),'Proceed to checkout')]";
+    private final  String tableProduct =
+            "//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']//tbody";
 
     public void removeItem() {
 
-            WebElement item =
-                    $(btnRemove).find();
-
-            item.click();
-
+        WebElement item = $(btnRemove).find();
+        item.click();
         WaitUtils.waitForStaleness(item);
     }
 
@@ -48,10 +46,8 @@ public class CartPage {
         while ( $(btnRemove).exists() && maxAttempts > 0) {
             try {
                 removeItem();
-
                 Thread.sleep(1000);
             } catch (Exception e) {
-
                 break;
             }
             maxAttempts--;
@@ -67,15 +63,14 @@ public class CartPage {
         if ($(msgEmptyCard).exists()) {
             DriverManager.refreshPage();
         }
-        String btnCheckOut = "//a[contains(text(),'Proceed to checkout')]";
+
         $(btnCheckOut).click();
     }
     public List<ProductInfo> getProductsInCart() {
 
         List<ProductInfo> products = new ArrayList<>();
 
-        String tableProduct =
-                "//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']//tbody";
+
 
         List<WebElement> rows =
                 $$(tableProduct + "//tr").gets();
@@ -134,11 +129,19 @@ public class CartPage {
     }
 
     public void verifyShoppingCardIsEmpty() {
-        if ($(msgEmptyCard).exists()) {
-            AssertUtils.assertContains(()->$(msgEmptyCard).text(), Messages.MSG_EMPTY_CARD.getMessage());
-        } else {
-            Assert.fail("Shopping Card Is Not Empty");
-        }
+
+        boolean isDisplayed = retryWait(
+                () -> $(msgEmptyCard).exists(),
+                Constant.timeInSecond,
+                Constant.timeInMilliSecond);
+
+        Assert.assertTrue(
+                isDisplayed,
+                "Shopping Cart is not empty");
+
+        AssertUtils.assertContains(
+                () -> $(msgEmptyCard).text(),
+                Messages.MSG_EMPTY_CARD.getMessage());
     }
 
     public void clickPlusBtn() {
@@ -180,7 +183,6 @@ public class CartPage {
     }
 
     public void verifyQuantity(String expQuantity) {
-
         String actQuantity =
                 $("//td[@class='product-quantity']//input")
                         .value();

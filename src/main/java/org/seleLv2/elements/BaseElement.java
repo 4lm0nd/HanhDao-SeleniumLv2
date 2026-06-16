@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.*;
 import org.seleLv2.common.constant.Constant;
 import org.seleLv2.common.enums.Conditions;
 import org.seleLv2.drivers.DriverManager;
+import org.seleLv2.utils.LogUtils;
+
 import java.time.Duration;
 
 
@@ -91,7 +93,6 @@ public class BaseElement {
 
         WebElement element =
                 waiter().until(driver -> {
-
                     List<WebElement> elements =
                             driver().findElements(locator);
                     return elements.stream()
@@ -154,17 +155,17 @@ public class BaseElement {
 
     public boolean exists() {
 
-        System.out.println("Checking exists: " + locator);
-
         try {
             List<WebElement> elements =
                     driver().findElements(locator);
 
-            System.out.println("Found: " + elements.size());
+            LogUtils.info("Found: " + elements.size());
 
             return !elements.isEmpty();
 
         } catch (Exception e) {
+
+            LogUtils.info("Elements Do Not Exit " + locator);
 
             e.printStackTrace();
 

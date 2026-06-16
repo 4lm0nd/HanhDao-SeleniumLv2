@@ -1,35 +1,33 @@
 package org.seleLv2.utils;
 
-import com.google.gson.stream.JsonReader;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import java.io.InputStreamReader;
-import java.io.InputStream;
+import com.jayway.jsonpath.JsonPath;
 
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class JsonUtils {
-    public static String getJsonValue(String fileName, String key) {
-        try {
-            // Load file from resources folder
-            ClassLoader classLoader = JsonReader.class.getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream(fileName);
+
+    public static <T> T getJsonValue(String fileName, String jsonPath) {
+
+        try (InputStream inputStream =
+                     JsonUtils.class.getClassLoader()
+                             .getResourceAsStream(fileName)) {
 
             if (inputStream == null) {
-                System.err.println("File Not Found: " + fileName);
-                return null;
+                throw new RuntimeException(
+                        "File not found: " + fileName);
             }
 
-            // Read and parse JSON
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader(inputStream, "UTF-8"));
+            String json =
+                    new String(inputStream.readAllBytes(),
+                            StandardCharsets.UTF_8);
 
-            return (String) jsonObject.get(key);
+            return JsonPath.read(json, jsonPath);
 
         } catch (Exception e) {
-            System.err.println("Error Reading JSON: " + e.getMessage());
-            return null;
+            throw new RuntimeException(
+                    "Error reading json file: " + fileName,
+                    e);
         }
     }
-    }
-
-
+}

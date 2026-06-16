@@ -7,16 +7,16 @@ import org.seleLv2.data.AccountInfo;
 import org.seleLv2.pages.AccountPage;
 import org.seleLv2.pages.CartPage;
 import org.seleLv2.pages.HeaderPage;
-import org.seleLv2.pages.ProductList;
+import org.seleLv2.pages.ManageProduct;
 import org.testng.annotations.Test;
 
-public class TC_08 extends BaseTest {
+public class TC_08_Test extends BaseTest {
 
     String account = Constant.account;
     String password = Constant.password;
     private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
-    private final ProductList productList = new ProductList();
+    private final ManageProduct productList = new ManageProduct();
     private final CartPage cartPage = new CartPage();
 
     @Test

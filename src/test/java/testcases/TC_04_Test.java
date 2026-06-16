@@ -9,16 +9,15 @@ import org.seleLv2.pages.*;
 import org.seleLv2.utils.AssertUtils;
 import org.seleLv2.utils.LogUtils;
 import org.seleLv2.utils.WaitUtils;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC_04 extends BaseTest {
+public class TC_04_Test extends BaseTest {
 
     String account = Constant.account;
     String password = Constant.password;
     private final AccountPage accountPage = new AccountPage();
     private final HeaderPage headerPage = new HeaderPage();
-    private final ProductList productList = new ProductList();
+    private final ManageProduct productList = new ManageProduct();
 
     @Test
     public void TC04() {
@@ -31,11 +30,11 @@ public class TC_04 extends BaseTest {
         LogUtils.info("Sort items by price: low to high");
         productList.filterProducts(SortOptions.OPTION_LOW_TO_HIGH.getSortOption());
         WaitUtils.waitForPageLoad(Constant.timeInSecond);
-        AssertUtils.assertActiveMode(productList.isSortedASC());
+        AssertUtils.assertActiveMode(productList.isSortedASC(),Constant.timeInSecond);
 
         LogUtils.info("Sort items by price: high to low");
         productList.filterProducts(SortOptions.OPTION_HIGH_TO_LOW.getSortOption());
         WaitUtils.waitForPageLoad(Constant.timeInSecond);
-        AssertUtils.assertActiveMode(productList.isSortedDESC());
+        AssertUtils.assertActiveMode(productList.isSortedDESC(),Constant.timeInSecond);
     }
 }

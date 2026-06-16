@@ -30,29 +30,8 @@ public class ConfigFactory {
         return p;
     }
 
-    private static void load() {
-        try (InputStream input = ConfigFactory.class.getClassLoader()
-                .getResourceAsStream("config/config.properties")) {
-            if (input == null) {
-                LogUtils.info("Config file not found");
-            } else {
-                properties.load(input);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load config", e);
-        }
-    }
-
     public static String get(String key) {
         return getProperties().getProperty(key);
-    }
-
-    public static boolean getBoolean(String key) {
-        return Boolean.parseBoolean(get(key));
-    }
-
-    public static long getLong(String key) {
-        return Long.parseLong(get(key));
     }
 
     public static int getInt(String key) {
